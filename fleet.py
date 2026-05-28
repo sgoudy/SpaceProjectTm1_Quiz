@@ -1,5 +1,4 @@
 # Create a fleet of one spaceship to begin with. As we answer questions correctly, we can add those ships to our fleet. Each ship will have its own unique attributes and capabilities.
-from homebase import dottie 
 
 class Fleet():
     def __init__(self):

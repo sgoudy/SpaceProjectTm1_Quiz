@@ -24,9 +24,7 @@ def main():
     # texttime("★" * 55)
 
     # --- Setup Homebase ---
-    dottie = Homebase("Dottie", "Asteroid near Pluto, Milky Way", 12)
-    dottie.summary()
-
+    
     # --- Setup Player Ship ---
     player_ship = HackShip(
         name="The Phantom Byte",
@@ -36,6 +34,7 @@ def main():
     )
     player_ship.summary()
 
+   
     # --- Setup Target Ships ---
     targets = [
         EnemySpaceShip("Enterprise",  "Top Gun",   "Planet Vulcan",       2.3,  "Network Security"),
@@ -60,7 +59,7 @@ def main():
         if choice in ["1", "2", "3", "4"]:
             selected = targets[int(choice) - 1]
             break
-        print("  Invalid choice. Enter 1, 2, 3, or 4.")
+        print("  Invalid choice. Enter a number between 1 and 4.")
 
     # --- Run the Mission ---
     result = run_hack_mission(player_ship, selected)
@@ -70,13 +69,17 @@ def main():
     print("─" * 55)
     player_ship.summary()
     selected.summary()
-    ourFleet = fleet()
+    
     if result:
         print(f"\n  🎉 '{selected.name}' has been added to the Gone in 60 Parsecs fleet!")
-        ourFleet.add_ship(selected)
+        fleet.add_ship(selected)
+        print(f"\n  Current fleet status:")
+        fleet.summary()
     else:
-        print(f"\n  🔧 Return to Dottie for repairs and try again.")
-        print(f" Your fleet is sad. 😢 \n {ourFleet.summary}")
+        print(f"\n  💀 Mission Failed. '{selected.name}' remains out of reach.")
+        print(f"\nCurrent fleet status:")
+        fleet.summary()
+        # print(f"\n  🔧 Return to Dottie for repairs and try again.")
 
 if __name__ == "__main__":
     main()

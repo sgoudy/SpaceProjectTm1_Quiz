@@ -3,6 +3,8 @@ from hackship import HackShip
 from quiz import QUESTION_BANK
 from enemySS import EnemySpaceShip
 from homebase import Homebase
+from timer import countdown
+from animation import texttime
 # ─────────────────────────────────────────────
 #  MISSION: HACK A SHIP
 # ─────────────────────────────────────────────
@@ -38,12 +40,13 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
         for choice in choices:
             print(f"    {choice}")
 
-        response = input("\n  Your answer (a/b/c/d): ").strip().lower()
+        response = countdown()
 
         if response == answer:
             correct += 1
             target.breach(25)
-            print(f"\n  ✅ CORRECT! Defense breached → Ship defenses now at {target.defenses}%")
+            prompt = f"\n\n  ✅ CORRECT! Defense breached → Ship defenses now at {target.defenses}%"
+            texttime(prompt)
         else:
             wrong += 1
             player_ship.take_damage(25)

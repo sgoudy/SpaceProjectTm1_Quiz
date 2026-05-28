@@ -1,25 +1,24 @@
 """@Authors: Charles, Jordan, Shelby, Robert, Jon"""
-# Start a mission clock when the user enters the Death Star. 
-# The user has 10 minutes to complete the mission before the Death Star blows up. 
-# If the user does not complete the mission in time, they lose.
+# The user has a 15 second time limit to answer each question in the hack mission. 
+# If they fail to answer within the time limit, it counts as a wrong answer and damages their hull by 25%. 
+# The timer resets for each new question, giving them a fresh 15 seconds to respond. This adds an extra layer of challenge and urgency to the game, 
+# simulating the high-stakes environment of a space heist.
 
-# import time
-# t = 600
-# def countdown(t):
-#     while t:
-#         mins, secs = divmod(t, 60)
-#         timer = '{:02d}:{:02d}'.format(mins, secs)
-#         print(timer, end='\r')  # Overwrite the line each second
-#         time.sleep(1)
-#         t -= 1
+# ─────────────────────────────────────────────
+#  TIMED INPUT — 15 second live countdown
+# ─────────────────────────────────────────────
 
-#     print("Fire in the hole!!")
+from pytimedinput import timedInput
+def countdown():
+    prompt = "Your answer (a/b/c/d): "
+    answer = ''
+    print(f"{prompt} (You have 15 seconds)")
+    user_text, timed_out = timedInput("", timeout=15)
 
-# import time
-
-# start_time = time.time()
-
-# # Main program logic...
-# for i in range(10):
-#     print(f"Elapsed: {time.time() - start_time:.2f} seconds")
-#     time.sleep(1)   
+    if timed_out:
+        print("\n⏰ Time's up! No input received.")
+        answer = None
+    else:
+        answer = user_text.lower()
+        # print(f"\nYou answered: {answer}")   
+    return answer
