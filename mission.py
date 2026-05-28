@@ -18,16 +18,16 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
     - Lose condition: player ship hull reaches 0%
     """
 
-    print("\n" + "═" * 55)
-    print(f"  🔓 HACK MISSION: {target.name} [{target.codename}]")
-    print("═" * 55)
-    print(f"  Location : {target.location}")
-    print(f"  Distance : {target.distance} parsecs")
-    print(f"  Topic    : {target.cyber_topic}")
-    print(f"\n  Your Hull    : {player_ship.hull}%")
-    print(f"  Ship Defenses: {target.defenses}%")
-    print("\n  Answer 4 questions correctly to steal the ship!")
-    print("  But beware — wrong answers damage YOUR hull.\n")
+    texttime("\n" + "═" * 25)
+    texttime(f"  🔓 HACK MISSION: TARGET = {target.name} [{target.codename}] ")
+    texttime("═" * 25+"\n")
+    texttime(f"  Location : {target.location}\n")
+    texttime(f"  Distance : {target.distance} parsecs\n")
+    texttime(f"  Topic    : {target.cyber_topic}\n")
+    texttime(f"  Your Hull    : {player_ship.hull}%\n")
+    texttime(f"  Ship Defenses: {target.defenses}%\n")
+    texttime(f"  Answer 4 questions correctly to steal the ship!\n")
+    texttime(f"  But beware — wrong answers damage YOUR hull.\n")
 
     questions = random.sample(QUESTION_BANK[target.cyber_topic], 6)
 
@@ -35,46 +35,47 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
     wrong = 0
 
     for i, (question, answer, choices) in enumerate(questions, 1):
-        print(f"─── Question {i} of 6 ───────────────────────────────")
-        print(f"  {question}\n")
+        print(f"\n────────────────────────────────────────────────────────────")
+        texttime(f"──────────── Question {i} of 6 ───────────────────────────────\n")
+        texttime(f"  {question}\n")
         for choice in choices:
-            print(f"    {choice}")
+            texttime(f"    {choice}\n")
 
         response = countdown()
 
         if response == answer:
             correct += 1
             target.breach(25)
-            prompt = f"\n\n  ✅ CORRECT! Defense breached → Ship defenses now at {target.defenses}%"
-            texttime(prompt)
+            texttime(f"\n  ✅ CORRECT! Defense breached → {target.name}'s defenses now at {target.defenses}%\n")
+            
         else:
             wrong += 1
             player_ship.take_damage(25)
-            print(f"\n  ❌ WRONG!  Hull damaged → Your hull now at {player_ship.hull}%")
+            texttime(f"\n  ❌ WRONG!  Hull damaged → {player_ship.name}'s hull now at {player_ship.hull}%\n")
 
-        print(f"  [Score: {correct} correct / {wrong} wrong]\n")
+        texttime(f"  [Score: {correct} correct / {wrong} wrong]\n")
 
         # Check win condition
         if correct >= 4:
-            print("═" * 55)
-            print(f"  🏆 MISSION SUCCESS!")
-            print(f"  You hacked through {target.name}'s defenses!")
-            print(f"  The {target.name} is YOURS. Welcome to the fleet. 🚀")
-            print("═" * 55)
+            texttime("\n" + "═" * 25)
+            texttime(" 🏆 MISSION SUCCESS! ")
+            texttime("═" * 25 + "\n")
+            texttime(f"  You hacked through {target.name}'s defenses!\n")
+            texttime(f"  The {target.name} is YOURS. I will add it to your fleet. 🚀\n")
             return True
 
         # Check lose condition
         if player_ship.is_destroyed():
-            print("═" * 55)
-            print(f"  💥 MISSION FAILED!")
-            print(f"  {player_ship.name} has been destroyed!")
-            print(f"  {target.name}'s security systems overwhelmed you.")
-            print("═" * 55)
+            texttime("═" * 25)
+            texttime("  💥 MISSION FAILED!\n")
+            texttime(f"  {player_ship.name} has been destroyed!\n")
+            texttime(f"  {target.name}'s security systems overwhelmed you.\n")
+            texttime("═" * 25 + "\n")
             return False
 
     # Ran out of questions without winning
-    print("═" * 55)
-    print(f"  ❌ MISSION FAILED — Not enough correct answers.")
-    print(f"  {target.name} remains out of reach... for now.")
-    print("═" * 55)
+    texttime("═" * 25)
+    texttime("  ❌ MISSION FAILED — Not enough correct answers.\n")
+    texttime(f"  {target.name} remains out of reach... for now.\n")
+    texttime("═" * 25 + "\n")
     return False

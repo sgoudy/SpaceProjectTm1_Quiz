@@ -17,11 +17,19 @@ from fleet import fleet
 # ─────────────────────────────────────────────
 #  MAIN PROGRAM
 # ─────────────────────────────────────────────
+# instantiate all enemy ships
+targets = [
+        EnemySpaceShip("Enterprise",  "Top Gun",   "Planet Vulcan",       2.3,  "Network Security"),
+        EnemySpaceShip("Eleanor",     "ANDROMEDA", "Planet Vega",         5.1,  "Encryption"),
+        EnemySpaceShip("Tardis",      "Tesla",     "Jupiter's Moon: Io",  1.8,  "Social Engineering"),
+        EnemySpaceShip("Serenity",    "Firefly",   "Saturn's Moon: Titan",1.2,  "Malware & Intrusion"),
+    ]
+
 def main():
-    # texttime("\n" + "★" * 55)
+    # texttime("\n" + "★" * 25)
     # texttime("       GONE IN 60 PARSECS")
     # texttime("       Space Heist | Hack or Be Hacked       ")
-    # texttime("★" * 55)
+    # texttime("★" * 25)
 
     # --- Setup Homebase ---
     
@@ -35,51 +43,51 @@ def main():
     player_ship.summary()
 
    
-    # --- Setup Target Ships ---
-    targets = [
-        EnemySpaceShip("Enterprise",  "Top Gun",   "Planet Vulcan",       2.3,  "Network Security"),
-        EnemySpaceShip("Eleanor",     "ANDROMEDA", "Planet Vega",         5.1,  "Encryption"),
-        EnemySpaceShip("Tardis",      "Tesla",     "Jupiter's Moon: Io",  1.8,  "Social Engineering"),
-        EnemySpaceShip("Serenity",    "Firefly",   "Saturn's Moon: Titan",1.2,  "Malware & Intrusion"),
-    ]
-
-    print("\n\n📋  ACTIVE TARGETS")
-    print("─" * 55)
+        # --- Display Targets ---
+    texttime("\n" + "─" * 25)
+    texttime(" 📋 ACTIVE TARGETS ")
+    texttime("─" * 25)
     for t in targets:
         t.summary()
 
     # --- Ship Selection Menu ---
-    print("\n\n🎮  SELECT YOUR TARGET")
-    print("─" * 55)
+    texttime("\n" + "─" * 25)
+    texttime(" 🎮 SELECT YOUR TARGET ")
+    texttime("─" * 25 + "\n\n")
     for i, t in enumerate(targets, 1):
-        print(f"  {i}. {t.name} [{t.codename}] — {t.location} ({t.distance} parsecs) | Topic: {t.cyber_topic}")
+        texttime(f"  {i}. {t.name} [{t.codename}] — {t.location} ({t.distance} parsecs) | Topic: {t.cyber_topic}\n")
 
     while True:
         choice = input("\n  Enter target number (1-4): ").strip()
         if choice in ["1", "2", "3", "4"]:
             selected = targets[int(choice) - 1]
             break
-        print("  Invalid choice. Enter a number between 1 and 4.")
+        texttime("\nInvalid choice. Please enter a number between 1 and 4.")
 
     # --- Run the Mission ---
     result = run_hack_mission(player_ship, selected)
 
     # --- Final Status ---
-    print("\n📊  END OF MISSION REPORT")
-    print("─" * 55)
-    player_ship.summary()
-    selected.summary()
+    texttime("\n" + "═" * 25)
+    texttime(" 📊 GENERATING END OF MISSION REPORT ")
+    texttime("═" * 25 + "\n")
     
     if result:
-        print(f"\n  🎉 '{selected.name}' has been added to the Gone in 60 Parsecs fleet!")
+        texttime(f"\n  🎉 '{selected.name}' has been added to the Gone in 60 Parsecs fleet!\n")
         fleet.add_ship(selected)
-        print(f"\n  Current fleet status:")
+        targets.remove(selected)  # Remove the captured ship from the target list
         fleet.summary()
+        texttime(f"\n Would you like to attempt another mission? (y/n)")
+        again = input("  > ").strip().lower()
+        if again == 'y':
+            main()  # Restart the game loop
+        else:
+            texttime("\n  🚀 Thanks for playing Gone in 60 Parsecs! Safe travels, space pirate! 🌌\n")
     else:
-        print(f"\n  💀 Mission Failed. '{selected.name}' remains out of reach.")
-        print(f"\nCurrent fleet status:")
+        texttime(f"\n  💀 Mission Failed. '{selected.name}' remains out of reach.")
+        texttime(f"\nCurrent fleet status:")
         fleet.summary()
-        # print(f"\n  🔧 Return to Dottie for repairs and try again.")
+        texttime(f"\n  🔧 Return to Dottie for repairs and try again.")
 
 if __name__ == "__main__":
     main()

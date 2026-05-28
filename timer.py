@@ -9,16 +9,16 @@
 # ─────────────────────────────────────────────
 
 from pytimedinput import timedInput
+
+from animation import texttime
 def countdown():
-    prompt = "Your answer (a/b/c/d): "
-    answer = ''
-    print(f"{prompt} (You have 15 seconds)")
+    texttime("\n⏳ Time remaining: 15 seconds\nChoose wisely (a/b/c/d): \n")
+    
     user_text, timed_out = timedInput("", timeout=15)
 
     if timed_out:
-        print("\n⏰ Time's up! No input received.")
+        texttime("\n⏰ Time's up! No input received.")
         answer = None
     else:
-        answer = user_text.lower()
-        # print(f"\nYou answered: {answer}")   
+        answer = user_text.lower() 
     return answer

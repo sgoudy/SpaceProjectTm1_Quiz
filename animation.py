@@ -8,7 +8,7 @@ def texttime(words):
 	for c in words:
 		sys.stdout.write(c)
 		sys.stdout.flush()
-		time.sleep(0.05)
+		time.sleep(0.025)
 
 
 # Progress bar animation for loading the game
