@@ -3,19 +3,25 @@ Authors: Charles, Jordan, Jon, Robert, Shelby
 Date: April Cohort 2026
 """
 from hackship import HackShip
+# import random
+import random   
 from mission import run_hack_mission
 from quiz import QUESTION_BANK
 from enemySS import EnemySpaceShip
 from homebase import Homebase   
+from animation import texttime, slow_progress_bar
+# from timer import countdown
+from fleet import fleet
 
+    # countdown(60)  # Start the mission timer (10 minutes)
 # ─────────────────────────────────────────────
 #  MAIN PROGRAM
 # ─────────────────────────────────────────────
 def main():
-    print("\n" + "★" * 55)
-    print("       GONE IN 60 PARSECS")
-    print("       Space Heist | Hack or Be Hacked")
-    print("★" * 55)
+    # texttime("\n" + "★" * 55)
+    # texttime("       GONE IN 60 PARSECS")
+    # texttime("       Space Heist | Hack or Be Hacked       ")
+    # texttime("★" * 55)
 
     # --- Setup Homebase ---
     dottie = Homebase("Dottie", "Asteroid near Pluto, Milky Way", 12)
@@ -64,12 +70,13 @@ def main():
     print("─" * 55)
     player_ship.summary()
     selected.summary()
-
+    ourFleet = fleet()
     if result:
         print(f"\n  🎉 '{selected.name}' has been added to the Gone in 60 Parsecs fleet!")
+        ourFleet.add_ship(selected)
     else:
         print(f"\n  🔧 Return to Dottie for repairs and try again.")
-
+        print(f" Your fleet is sad. 😢 \n {ourFleet.summary}")
 
 if __name__ == "__main__":
     main()

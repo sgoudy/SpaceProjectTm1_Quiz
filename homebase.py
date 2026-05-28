@@ -21,3 +21,4 @@ class Homebase:
         print(f"   Location : {self.location}")
         print(f"   Soles on Board: {self.SOB} crew members")
 
+dottie = Homebase("Dottie", "Asteroid near Pluto, Milky Way", 12)
