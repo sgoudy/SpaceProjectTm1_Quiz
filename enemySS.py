@@ -1,6 +1,9 @@
 # ─────────────────────────────────────────────
 #  CLASS: EnemySpaceShip  (Destination / Target)
 # ─────────────────────────────────────────────
+import time
+
+
 class EnemySpaceShip:
     """
     A target ship to be hacked and stolen.
@@ -33,9 +36,12 @@ class EnemySpaceShip:
         return self.defenses <= 0
 
     def summary(self):
-        print(f"\n🎯  TARGET SHIP: {self.name}  [{self.codename}]")
+        print(f"\n🎯 TARGET SHIP: {self.name}  [{self.codename}]")
+        time.sleep(0.2)
         print(f"   Location  : {self.location}")
+        time.sleep(0.2)
         print(f"   Distance  : {self.distance} parsecs from Dottie")
+        time.sleep(0.2)    
         print(f"   Defenses  : {self.defenses}%")
-        print(f"   Cyber Topic: {self.cyber_topic}")
-
+        time.sleep(0.2)
+        print(f"   Cyber Topic: {self.cyber_topic}\n")

@@ -2,8 +2,7 @@
 Authors: Charles, Jordan, Jon, Robert, Shelby
 Date: April Cohort 2026
 """
-from time import time
-
+import time
 from hackship import HackShip
 # import random
 import random   
@@ -16,17 +15,14 @@ from animation import texttime, slow_progress_bar
 from fleet import fleet
 from datetime import datetime
 from intro import intro_scroll
+from datetime import datetime
+
+
 
 # ─────────────────────────────────────────────
 #  MAIN PROGRAM
 # ─────────────────────────────────────────────
-# instantiate all enemy ships
-targets = [
-        EnemySpaceShip("Enterprise",  "Top Gun",   "Planet Vulcan",       2.3,  "Network Security"),
-        EnemySpaceShip("Eleanor",     "ANDROMEDA", "Planet Vega",         5.1,  "Encryption"),
-        EnemySpaceShip("Tardis",      "Tesla",     "Jupiter's Moon: Io",  1.8,  "Social Engineering"),
-        EnemySpaceShip("Serenity",    "Firefly",   "Saturn's Moon: Titan",1.2,  "Malware & Intrusion"),
-    ]
+
 
 mission_time = None  # Global variable to track mission start time
 
@@ -38,7 +34,7 @@ def main():
     intro_scroll()
 
     # --- Setup Homebase ---
-    texttime("\n\nInitializing Dottie's Homebase...")
+    texttime("\n\n   ...Initializing Dottie's Homebase...\n")
     dottie = Homebase("Dottie", "Asteroid near Pluto, Milky Way", 12)
     texttime(dottie.summary())
 
@@ -49,14 +45,21 @@ def main():
 
    
     # --- Display Targets ---
-    texttime("\n" + "─" * 25)
-    texttime(" 📋 ACTIVE TARGETS >> WHICH SHALL WE TARGET? ")
-    texttime("─" * 25)
+    # instantiate all enemy ships
+    targets = [
+            EnemySpaceShip("Enterprise",  "Top Gun",   "Planet Vulcan",       2.3,  "Network Security"),
+            EnemySpaceShip("Eleanor",     "ANDROMEDA", "Planet Vega",         5.1,  "Encryption"),
+            EnemySpaceShip("Tardis",      "Tesla",     "Jupiter's Moon: Io",  1.8,  "Social Engineering"),
+            EnemySpaceShip("Serenity",    "Firefly",   "Saturn's Moon: Titan",1.2,  "Malware & Intrusion"),
+        ]
+
+    texttime("\n" + "─" * 25 +" 📋 ACTIVE TARGETS >> WHO SHOULD WE ATTACK? "+"─" * 25 +"\n")
     for t in targets:
         t.summary()
 
 
     while True:
+        startTime = datetime.now()
         choice = input("\n  Enter target number (1-4): ").strip()
         if choice in ["1", "2", "3", "4"]:
             selected = targets[int(choice) - 1]
@@ -64,41 +67,46 @@ def main():
            
 
             # Get current time
-            now = datetime.now()
-            # Print only time (HH:MM:SS)
-            # print(now.strftime("%H:%M:%S"))
-
-
-            mission_time = time()
+            
             break
+
         texttime("\nInvalid choice. Please enter a number between 1 and 4.")
 
     # --- Run the Mission ---
+    start_time = datetime.now()
+
     result = run_hack_mission(player_ship, selected)
 
     # --- Final Status ---
-    texttime("\n" + "═" * 25)
-    texttime(" 📊 GENERATING END OF MISSION REPORT ")
-    texttime("═" * 25 + "\n")
+    texttime("\n" + "═" * 25+" 📊 GENERATING END OF MISSION REPORT "+"═" * 25 + "\n")
     
     if result:
-        mission_duration = datetime.now - now
-        texttime(f"  Mission Duration: {mission_duration:.2f} seconds\n")
+        # mission_duration = datetime.now() - startTime
+        # texttime(f"  Mission Duration: {mission_duration:.2f} seconds\n")
         texttime(f"\n  🎉 '{selected.name}' has been added to the Gone in 60 Parsecs fleet!\n")
         fleet.add_ship(selected)
         targets.remove(selected)  # Remove the captured ship from the target list
         fleet.summary()
         texttime(f"\n Would you like to attempt another mission? (y/n)")
+        end_time = datetime.now()
+        elapsed_time = end_time - start_time
+
+        print(f"\nElapsed time: {elapsed_time}")
         again = input("  > ").strip().lower()
         if again == 'y':
             main()  # Restart the game loop
         else:
             texttime("\n  🚀 Thanks for playing Gone in 60 Parsecs! Safe travels, space pirate! 🌌\n")
     else:
-        texttime(f"\n  💀 Mission Failed. '{selected.name}' remains out of reach.")
-        texttime(f"\nCurrent fleet status:")
+        texttime(f"\n\n  💀 Mission Failed. '{selected.name}' remains out of reach.")
+        end_time = datetime.now()
+        elapsed_time = end_time - start_time
+
+        print(f"\nElapsed time: {elapsed_time}\n")
+        texttime(f"\n\nCurrent fleet status:\n")
         fleet.summary()
-        texttime(f"\n  🔧 Return to Dottie for repairs and try again.")
+        texttime(f"\n  🔧 Return to Dottie for repairs and try again.\n")
+        
 
 if __name__ == "__main__":
     main()

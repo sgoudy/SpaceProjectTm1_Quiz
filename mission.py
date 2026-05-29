@@ -37,7 +37,7 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
 
     for i, (question, answer, choices) in enumerate(questions, 1):
         print(f"\n────────────────────────────────────────────────────────────")
-        texttime(f"──────────── Question {i} of 6 ───────────────────────────────\n")
+        texttime(f"──────────── Question {i} of 6 ───────────────────────────────\n\n")
         texttime(f"  {question}\n")
         for choice in choices:
             texttime(f"    {choice}\n")
@@ -58,20 +58,16 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
 
         # Check win condition
         if correct >= 4:
-            texttime("\n" + "═" * 25)
-            texttime(" 🏆 MISSION SUCCESS! ")
-            texttime("═" * 25 + "\n")
+            texttime("\n" + "═" * 25 + " 🏆 MISSION SUCCESS! "+ "═" * 25 + "\n")
             texttime(f"  You hacked through {target.name}'s defenses!\n")
             texttime(f"  The {target.name} is YOURS. I will add it to your fleet. 🚀\n")
             return True
 
         # Check lose condition
         if player_ship.is_destroyed():
-            texttime("═" * 25)
-            texttime("  💥 MISSION FAILED!\n")
+            texttime("\n"+"═" * 25 + "  💥 MISSION FAILED! "+ "═" * 25 + "\n")
             texttime(f"  {player_ship.name} has been destroyed!\n")
             texttime(f"  {target.name}'s security systems overwhelmed you.\n")
-            texttime("═" * 25 + "\n")
             return False
 
     # Ran out of questions without winning

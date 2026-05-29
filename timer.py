@@ -9,12 +9,24 @@
 # ─────────────────────────────────────────────
 
 from pytimedinput import timedInput
+from datetime import datetime
+
+start_time = datetime.now()
+
+# Perform your task here
+import time
+time.sleep(2)
+
+end_time = datetime.now()
+elapsed_time = end_time - start_time
+
+print(f"Elapsed time: {elapsed_time}")
 
 from animation import slow_progress_bar, texttime
 def countdown():
     texttime("\n⏳ Time remaining: 15 seconds\n")
     texttime("Choose wisely (a/b/c/d): \n") 
-    
+
     user_text, timed_out = timedInput("", timeout=15)
     # slow_progress_bar()  # Show the loading animation as a visual timer
     
