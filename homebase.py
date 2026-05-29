@@ -17,8 +17,4 @@ class Homebase:
         self.SOB = SOB
 
     def summary(self):
-        print(f"\n🪨  HOMEBASE: {self.name}")
-        print(f"   Location : {self.location}")
-        print(f"   Soles on Board: {self.SOB} crew members")
-
-dottie = Homebase("Dottie", "Asteroid near Pluto, Milky Way", 12)
+        return(f"\n🪨  HOMEBASE : {self.name}\n   Location : {self.location}\n   Soles on Board: {self.SOB} crew members\n")

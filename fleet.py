@@ -14,5 +14,3 @@ class Fleet():
             print(f"  {ship.name}\n")
 
 fleet = Fleet()
-print(f"\nFleet initialized with {len(fleet.ships)} ships. Current fleet status:")
-fleet.summary()

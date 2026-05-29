@@ -5,6 +5,7 @@ from enemySS import EnemySpaceShip
 from homebase import Homebase
 from timer import countdown
 from animation import texttime
+
 # ─────────────────────────────────────────────
 #  MISSION: HACK A SHIP
 # ─────────────────────────────────────────────
@@ -74,8 +75,8 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
             return False
 
     # Ran out of questions without winning
-    texttime("═" * 25+"\n")
-    texttime("  ❌ MISSION FAILED — Not enough correct answers.\n")
-    texttime(f"  {target.name} remains out of reach... for now.\n")
-    texttime("═" * 25 + "\n")
+    texttime("═" * 15+"\n")
+    texttime("  ❌ MISSION FAILED::  ")
+    texttime(f"{target.name} remains out of reach... for now.")
+    texttime("═" * 15 + "\n")
     return False

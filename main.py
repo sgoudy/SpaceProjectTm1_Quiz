@@ -10,11 +10,12 @@ import random
 from mission import run_hack_mission
 from quiz import QUESTION_BANK
 from enemySS import EnemySpaceShip
-from homebase import Homebase   
+from homebase import Homebase
 from animation import texttime, slow_progress_bar
 # from timer import countdown
 from fleet import fleet
-
+from datetime import datetime
+from intro import intro_scroll
 
 # ─────────────────────────────────────────────
 #  MAIN PROGRAM
@@ -31,43 +32,43 @@ mission_time = None  # Global variable to track mission start time
 
 def main():
     texttime("\n" + "★" * 25)
-    texttime("       GONE IN 60 PARSECS")
-    texttime("       Space Heist | Hack or Be Hacked       ")
+    texttime("       GONE IN 60 PARSECS >> Space Heist | Hack or Be Hacked       ")
     texttime("★" * 25+"\n\n")
 
+    intro_scroll()
+
     # --- Setup Homebase ---
-    ## still to do 
+    texttime("\n\nInitializing Dottie's Homebase...")
+    dottie = Homebase("Dottie", "Asteroid near Pluto, Milky Way", 12)
+    texttime(dottie.summary())
 
 
     # --- Setup Player Ship ---
-    player_ship = HackShip(
-        name="The Phantom Byte",
-        speed=4.2,
-        capacity=6,
-        weapons=["EMP Cannon", "Cyber Spike", "Signal Jammer"]
-    )
-    player_ship.summary()
+    player_ship = HackShip(name="The Phantom Byte",speed=4.2,capacity=6,weapons=["EMP Cannon", "Cyber Spike", "Signal Jammer"]    )
+    texttime(player_ship.summary())
 
    
-        # --- Display Targets ---
+    # --- Display Targets ---
     texttime("\n" + "─" * 25)
-    texttime(" 📋 ACTIVE TARGETS ")
+    texttime(" 📋 ACTIVE TARGETS >> WHICH SHALL WE TARGET? ")
     texttime("─" * 25)
     for t in targets:
         t.summary()
 
-    # --- Ship Selection Menu ---
-    texttime("\n" + "─" * 25)
-    texttime(" 🎮 SELECT YOUR TARGET ")
-    texttime("─" * 25 + "\n\n")
-    for i, t in enumerate(targets, 1):
-        texttime(f"  {i}. {t.name} [{t.codename}] — {t.location} ({t.distance} parsecs) | Topic: {t.cyber_topic}\n")
 
     while True:
         choice = input("\n  Enter target number (1-4): ").strip()
         if choice in ["1", "2", "3", "4"]:
             selected = targets[int(choice) - 1]
             # make note of the time when the mission starts, so we can calculate total mission duration at the end
+           
+
+            # Get current time
+            now = datetime.now()
+            # Print only time (HH:MM:SS)
+            # print(now.strftime("%H:%M:%S"))
+
+
             mission_time = time()
             break
         texttime("\nInvalid choice. Please enter a number between 1 and 4.")
@@ -81,7 +82,7 @@ def main():
     texttime("═" * 25 + "\n")
     
     if result:
-        mission_duration = time.time() - mission_time
+        mission_duration = datetime.now - now
         texttime(f"  Mission Duration: {mission_duration:.2f} seconds\n")
         texttime(f"\n  🎉 '{selected.name}' has been added to the Gone in 60 Parsecs fleet!\n")
         fleet.add_ship(selected)
