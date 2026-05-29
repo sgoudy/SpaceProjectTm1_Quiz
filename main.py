@@ -2,6 +2,8 @@
 Authors: Charles, Jordan, Jon, Robert, Shelby
 Date: April Cohort 2026
 """
+from time import time
+
 from hackship import HackShip
 # import random
 import random   
@@ -13,7 +15,7 @@ from animation import texttime, slow_progress_bar
 # from timer import countdown
 from fleet import fleet
 
-    # countdown(60)  # Start the mission timer (10 minutes)
+
 # ─────────────────────────────────────────────
 #  MAIN PROGRAM
 # ─────────────────────────────────────────────
@@ -25,14 +27,18 @@ targets = [
         EnemySpaceShip("Serenity",    "Firefly",   "Saturn's Moon: Titan",1.2,  "Malware & Intrusion"),
     ]
 
+mission_time = None  # Global variable to track mission start time
+
 def main():
-    # texttime("\n" + "★" * 25)
-    # texttime("       GONE IN 60 PARSECS")
-    # texttime("       Space Heist | Hack or Be Hacked       ")
-    # texttime("★" * 25)
+    texttime("\n" + "★" * 25)
+    texttime("       GONE IN 60 PARSECS")
+    texttime("       Space Heist | Hack or Be Hacked       ")
+    texttime("★" * 25+"\n\n")
 
     # --- Setup Homebase ---
-    
+    ## still to do 
+
+
     # --- Setup Player Ship ---
     player_ship = HackShip(
         name="The Phantom Byte",
@@ -61,6 +67,8 @@ def main():
         choice = input("\n  Enter target number (1-4): ").strip()
         if choice in ["1", "2", "3", "4"]:
             selected = targets[int(choice) - 1]
+            # make note of the time when the mission starts, so we can calculate total mission duration at the end
+            mission_time = time()
             break
         texttime("\nInvalid choice. Please enter a number between 1 and 4.")
 
@@ -73,6 +81,8 @@ def main():
     texttime("═" * 25 + "\n")
     
     if result:
+        mission_duration = time.time() - mission_time
+        texttime(f"  Mission Duration: {mission_duration:.2f} seconds\n")
         texttime(f"\n  🎉 '{selected.name}' has been added to the Gone in 60 Parsecs fleet!\n")
         fleet.add_ship(selected)
         targets.remove(selected)  # Remove the captured ship from the target list

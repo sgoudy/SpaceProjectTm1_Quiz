@@ -10,12 +10,14 @@
 
 from pytimedinput import timedInput
 
-from animation import texttime
+from animation import slow_progress_bar, texttime
 def countdown():
-    texttime("\n⏳ Time remaining: 15 seconds\nChoose wisely (a/b/c/d): \n")
+    texttime("\n⏳ Time remaining: 15 seconds\n")
+    texttime("Choose wisely (a/b/c/d): \n") 
     
     user_text, timed_out = timedInput("", timeout=15)
-
+    # slow_progress_bar()  # Show the loading animation as a visual timer
+    
     if timed_out:
         texttime("\n⏰ Time's up! No input received.")
         answer = None

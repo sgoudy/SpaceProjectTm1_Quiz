@@ -38,3 +38,4 @@ class EnemySpaceShip:
         print(f"   Distance  : {self.distance} parsecs from Dottie")
         print(f"   Defenses  : {self.defenses}%")
         print(f"   Cyber Topic: {self.cyber_topic}")
+

@@ -74,7 +74,7 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
             return False
 
     # Ran out of questions without winning
-    texttime("═" * 25)
+    texttime("═" * 25+"\n")
     texttime("  ❌ MISSION FAILED — Not enough correct answers.\n")
     texttime(f"  {target.name} remains out of reach... for now.\n")
     texttime("═" * 25 + "\n")
