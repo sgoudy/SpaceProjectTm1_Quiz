@@ -1,4 +1,5 @@
 import random
+import time
 from hackship import HackShip
 from quiz import QUESTION_BANK
 from enemySS import EnemySpaceShip
@@ -18,16 +19,16 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
     - Win condition: 4 correct answers (defenses reach 0%)
     - Lose condition: player ship hull reaches 0%
     """
+    missionBrief = [f"  Location : {target.location}",
+                    f"  Distance : {target.distance} parsecs",
+                    f"  Topic    : {target.cyber_topic}",
+                    f"  Your Hull: {player_ship.hull}%"]
+    
+    for line in missionBrief:
+        print(line)
+        time.sleep(0.2)  
 
-    texttime("\n" + "═" * 25)
-    texttime(f"  🔓 HACK MISSION: TARGET = {target.name} [{target.codename}] ")
-    texttime("═" * 25+"\n")
-    texttime(f"  Location : {target.location}\n")
-    texttime(f"  Distance : {target.distance} parsecs\n")
-    texttime(f"  Topic    : {target.cyber_topic}\n")
-    texttime(f"  Your Hull    : {player_ship.hull}%\n")
-    texttime(f"  Ship Defenses: {target.defenses}%\n")
-    texttime(f"  Answer 4 questions correctly to steal the ship!\n")
+    texttime(f"\n  Answer 4 questions correctly to steal the ship!\n")
     texttime(f"  But beware — wrong answers damage YOUR hull.\n")
 
     questions = random.sample(QUESTION_BANK[target.cyber_topic], 6)
@@ -58,7 +59,7 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
 
         # Check win condition
         if correct >= 4:
-            texttime("\n" + "═" * 25 + " 🏆 MISSION SUCCESS! "+ "═" * 25 + "\n")
+            texttime("\n" + "═" * 25 + " 🏆 MISSION SUCCESS! "+ "═" * 25 + "\n\n")
             texttime(f"  You hacked through {target.name}'s defenses!\n")
             texttime(f"  The {target.name} is YOURS. I will add it to your fleet. 🚀\n")
             return True

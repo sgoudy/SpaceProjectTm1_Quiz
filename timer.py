@@ -11,17 +11,6 @@
 from pytimedinput import timedInput
 from datetime import datetime
 
-start_time = datetime.now()
-
-# Perform your task here
-import time
-time.sleep(2)
-
-end_time = datetime.now()
-elapsed_time = end_time - start_time
-
-print(f"Elapsed time: {elapsed_time}")
-
 from animation import slow_progress_bar, texttime
 def countdown():
     texttime("\n⏳ Time remaining: 15 seconds\n")
@@ -36,3 +25,14 @@ def countdown():
     else:
         answer = user_text.lower() 
     return answer
+
+def missionTimer(start_time):
+    end_time = datetime.now() 
+    duration = end_time - start_time
+   
+    # Extract total seconds and calculate minutes/seconds
+    total_seconds = int(duration.total_seconds())
+    minutes = total_seconds // 60
+    seconds = total_seconds % 60
+
+    return(f"  Mission Duration: {minutes:02d}:{seconds:02d}\n")

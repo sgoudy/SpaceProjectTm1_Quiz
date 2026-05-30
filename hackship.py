@@ -30,4 +30,8 @@ class HackShip:
         return self.hull <= 0
 
     def summary(self):
-        return(f"\n🚀 HACK SHIP: {self.name}\n   Speed    : {self.speed} parsecs/hr\n   Capacity : {self.capacity} crew\n   Hull     : {self.hull}%\n   Weapons  : {', '.join(self.weapons)}\n")
+        return[f"\n🚀 YOUR HACK SHIP: {self.name}", 
+               f"   Speed    : {self.speed} parsecs/hr", 
+               f"   Capacity : {self.capacity} crew", 
+               f"   Hull     : {self.hull}%", 
+               f"   Weapons  : {', '.join(self.weapons)}"]

@@ -37,11 +37,11 @@ class EnemySpaceShip:
 
     def summary(self):
         print(f"\n🎯 TARGET SHIP: {self.name}  [{self.codename}]")
-        time.sleep(0.2)
+        time.sleep(0.3)
         print(f"   Location  : {self.location}")
-        time.sleep(0.2)
+        time.sleep(0.3)
         print(f"   Distance  : {self.distance} parsecs from Dottie")
-        time.sleep(0.2)    
+        time.sleep(0.3)    
         print(f"   Defenses  : {self.defenses}%")
-        time.sleep(0.2)
+        time.sleep(0.3)
         print(f"   Cyber Topic: {self.cyber_topic}\n")

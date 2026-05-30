@@ -16,7 +16,7 @@ from fleet import fleet
 from datetime import datetime
 from intro import intro_scroll
 from datetime import datetime
-
+from timer import missionTimer
 
 
 # ─────────────────────────────────────────────
@@ -24,28 +24,33 @@ from datetime import datetime
 # ─────────────────────────────────────────────
 
 
-mission_time = None  # Global variable to track mission start time
-
 def main():
-    texttime("\n" + "★" * 25)
-    texttime("       GONE IN 60 PARSECS >> Space Heist | Hack or Be Hacked       ")
-    texttime("★" * 25+"\n\n")
 
-    intro_scroll()
+    # texttime("\n" + "★" * 25+"       GONE IN 60 PARSECS >> Space Heist | Hack or Be Hacked       "+"★" * 25+"\n\n")
+
+    # intro_scroll()
 
     # --- Setup Homebase ---
     texttime("\n\n   ...Initializing Dottie's Homebase...\n")
+    time.sleep(1.5)
+    # Instantiating the homebase with specific attributes
     dottie = Homebase("Dottie", "Asteroid near Pluto, Milky Way", 12)
-    texttime(dottie.summary())
-
+    # for line in dottie.summary():
+    #     print(line)
+    #     time.sleep(0.3)
 
     # --- Setup Player Ship ---
+    texttime("\n\n   ...Initializing Your Hack Ship on Dottie...\n")
+    time.sleep(1.5)
+    # Instantiating the player's hack ship with specific attributes
     player_ship = HackShip(name="The Phantom Byte",speed=4.2,capacity=6,weapons=["EMP Cannon", "Cyber Spike", "Signal Jammer"]    )
-    texttime(player_ship.summary())
+    # for line in player_ship.summary():
+    #     print(line)
+    #     time.sleep(0.3)
 
    
     # --- Display Targets ---
-    # instantiate all enemy ships
+    # Instantiating the target ships with specific attributes
     targets = [
             EnemySpaceShip("Enterprise",  "Top Gun",   "Planet Vulcan",       2.3,  "Network Security"),
             EnemySpaceShip("Eleanor",     "ANDROMEDA", "Planet Vega",         5.1,  "Encryption"),
@@ -53,60 +58,76 @@ def main():
             EnemySpaceShip("Serenity",    "Firefly",   "Saturn's Moon: Titan",1.2,  "Malware & Intrusion"),
         ]
 
-    texttime("\n" + "─" * 25 +" 📋 ACTIVE TARGETS >> WHO SHOULD WE ATTACK? "+"─" * 25 +"\n")
-    for t in targets:
-        t.summary()
+    texttime("\n" + "─" * 25 +" 📋 ACTIVE TARGETS >> SELECT YOUR FIRST VICTIM  "+"─" * 25 +"\n")
+    # for t in targets:
+        # t.summary()
+        # time.sleep(0.3)
 
 
+    number_list = list(range(len(targets)))
+    numberListPlusOne = [item + 1 for item in number_list]  # More concise list comprehension
+
+    # Have the player choose which ship based on number of ships in list
     while True:
-        startTime = datetime.now()
-        choice = input("\n  Enter target number (1-4): ").strip()
-        if choice in ["1", "2", "3", "4"]:
-            selected = targets[int(choice) - 1]
-            # make note of the time when the mission starts, so we can calculate total mission duration at the end
-           
-
-            # Get current time
+        choice = input(f"\n  Select your target {numberListPlusOne}: ")
+        
+        try:
+            # Convert input to integer immediately
+            choice_int = int(choice)
             
-            break
-
-        texttime("\nInvalid choice. Please enter a number between 1 and 4.")
+            if choice_int in numberListPlusOne:
+                selected = targets[choice_int - 1]
+                print("\n" + "═" * 25+ f"  🔓 HACK MISSION: TARGET = {selected.name} [{selected.codename}] "+"═" * 25+"\n\n")
+                break
+            else:
+                print("Invalid choice: Number not in the list.")
+                
+        except ValueError:
+            print("Invalid input: Please enter a valid number.")
 
     # --- Run the Mission ---
     start_time = datetime.now()
 
-    result = run_hack_mission(player_ship, selected)
+    # result = run_hack_mission(player_ship, selected)
 
     # --- Final Status ---
-    texttime("\n" + "═" * 25+" 📊 GENERATING END OF MISSION REPORT "+"═" * 25 + "\n")
-    
+    texttime("\n" + "═" * 25+"      📊 GENERATING END OF MISSION REPORT       "+"═" * 25 + "\n")
+    result = True
     if result:
-        # mission_duration = datetime.now() - startTime
-        # texttime(f"  Mission Duration: {mission_duration:.2f} seconds\n")
+        
+        # Mission duration
+        time_for_mission = missionTimer(start_time)
+        texttime(time_for_mission)
+        
+        # Add ship to fleet
         texttime(f"\n  🎉 '{selected.name}' has been added to the Gone in 60 Parsecs fleet!\n")
         fleet.add_ship(selected)
-        targets.remove(selected)  # Remove the captured ship from the target list
-        fleet.summary()
-        texttime(f"\n Would you like to attempt another mission? (y/n)")
-        end_time = datetime.now()
-        elapsed_time = end_time - start_time
 
-        print(f"\nElapsed time: {elapsed_time}")
+        # Remove ship from target list
+        targets.remove(selected)  # Remove the captured ship from the target list
+        
+        fleet.summary()
+        
+    else:
+        texttime(f"\n\n  💀 Mission Failed. '{selected.name}' remains out of reach.")
+        
+         # Mission duration
+        time_for_mission = missionTimer(start_time)
+        texttime(time_for_mission)
+
+        texttime(f"\n\nCurrent fleet status:\n")
+        fleet.summary()
+        texttime(f"\n  🔧 Return to Dottie for repairs and try again.\n")
+
+        # Reset Game?
+        texttime(f"\n Would you like to attempt another mission? (y/n)")
+        
         again = input("  > ").strip().lower()
         if again == 'y':
             main()  # Restart the game loop
         else:
             texttime("\n  🚀 Thanks for playing Gone in 60 Parsecs! Safe travels, space pirate! 🌌\n")
-    else:
-        texttime(f"\n\n  💀 Mission Failed. '{selected.name}' remains out of reach.")
-        end_time = datetime.now()
-        elapsed_time = end_time - start_time
 
-        print(f"\nElapsed time: {elapsed_time}\n")
-        texttime(f"\n\nCurrent fleet status:\n")
-        fleet.summary()
-        texttime(f"\n  🔧 Return to Dottie for repairs and try again.\n")
-        
 
 if __name__ == "__main__":
     main()

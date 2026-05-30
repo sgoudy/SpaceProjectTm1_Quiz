@@ -35,7 +35,7 @@ intro_lines = [
     "",
     "  ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─",
     "",
-    "  You have 30 seconds per question.",
+    "  You have 15 seconds per question.",
     "  4 correct answers breaches their defenses.",
     "  1 wrong move damages YOUR hull.",
     "",
