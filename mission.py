@@ -4,7 +4,7 @@ from hackship import HackShip
 from quiz import QUESTION_BANK
 from enemySS import EnemySpaceShip
 from homebase import Homebase
-from timer import countdown
+from timer import get_strict_timed_choice #countdown,
 from animation import texttime
 
 # ─────────────────────────────────────────────
@@ -43,8 +43,8 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
         for choice in choices:
             texttime(f"    {choice}\n")
 
-        response = countdown()
-
+        # response = countdown()
+        response = get_strict_timed_choice()
         if response == answer:
             correct += 1
             target.breach(25)

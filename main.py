@@ -58,76 +58,87 @@ def main():
             EnemySpaceShip("Serenity",    "Firefly",   "Saturn's Moon: Titan",1.2,  "Malware & Intrusion"),
         ]
 
-    texttime("\n" + "─" * 25 +" 📋 ACTIVE TARGETS >> SELECT YOUR FIRST VICTIM  "+"─" * 25 +"\n")
-    # for t in targets:
-        # t.summary()
-        # time.sleep(0.3)
+    game = True
+    while game and len(targets) > 0: 
+        texttime("\n" + "─" * 25 +" 📋 ACTIVE TARGETS  "+"─" * 25 +"\n")
+       
+        # start=1 makes the index begin at 1 instead of the default 0
+        # for i, t in enumerate(targets, start=1):
+        #     print(f"{i}: ", end='', flush=True)
+        #     t.summary()
+        #     time.sleep(0.3)
 
+        number_list = list(range(len(targets)))
+        numberListPlusOne = [item + 1 for item in number_list]  # More concise list comprehension
 
-    number_list = list(range(len(targets)))
-    numberListPlusOne = [item + 1 for item in number_list]  # More concise list comprehension
-
-    # Have the player choose which ship based on number of ships in list
-    while True:
-        choice = input(f"\n  Select your target {numberListPlusOne}: ")
-        
-        try:
-            # Convert input to integer immediately
-            choice_int = int(choice)
+        # Have the player choose which ship based on number of ships in list
+        while True:
+            choice = input(f"\n  Select your target {numberListPlusOne}: ")
             
-            if choice_int in numberListPlusOne:
-                selected = targets[choice_int - 1]
-                print("\n" + "═" * 25+ f"  🔓 HACK MISSION: TARGET = {selected.name} [{selected.codename}] "+"═" * 25+"\n\n")
-                break
-            else:
-                print("Invalid choice: Number not in the list.")
+            try:
+                # Convert input to integer immediately
+                choice_int = int(choice)
                 
-        except ValueError:
-            print("Invalid input: Please enter a valid number.")
+                if choice_int in numberListPlusOne:
+                    selected = targets[choice_int - 1]
+                    print("\n" + "═" * 25+ f"  🔓 HACK MISSION: TARGET = {selected.name} [{selected.codename}] "+"═" * 25+"\n\n")
+                    break
+                else:
+                    print("Invalid choic2e: Number not in the list.")
+                    
+            except ValueError:
+                print("Invalid input: Please enter a valid number.")
 
-    # --- Run the Mission ---
-    start_time = datetime.now()
+        # --- Run the Mission ---
+        start_time = datetime.now()
 
-    # result = run_hack_mission(player_ship, selected)
+        result = run_hack_mission(player_ship, selected)
 
-    # --- Final Status ---
-    texttime("\n" + "═" * 25+"      📊 GENERATING END OF MISSION REPORT       "+"═" * 25 + "\n")
-    result = True
-    if result:
-        
-        # Mission duration
-        time_for_mission = missionTimer(start_time)
-        texttime(time_for_mission)
-        
-        # Add ship to fleet
-        texttime(f"\n  🎉 '{selected.name}' has been added to the Gone in 60 Parsecs fleet!\n")
-        fleet.add_ship(selected)
+        # --- Final Status ---
+        texttime("\n" + "═" * 25+"      📊 GENERATING END OF MISSION REPORT       "+"═" * 25 + "\n")
+        result = True
+        if result:
+            
+            # Mission duration
+            time_for_mission = missionTimer(start_time)
+            texttime(time_for_mission)
+            
+            # Add ship to fleet
+            texttime(f"\n  🎉 '{selected.name}' has been added to the Gone in 60 Parsecs fleet!\n")
+            fleet.add_ship(selected)
 
-        # Remove ship from target list
-        targets.remove(selected)  # Remove the captured ship from the target list
-        
-        fleet.summary()
-        
-    else:
-        texttime(f"\n\n  💀 Mission Failed. '{selected.name}' remains out of reach.")
-        
-         # Mission duration
-        time_for_mission = missionTimer(start_time)
-        texttime(time_for_mission)
-
-        texttime(f"\n\nCurrent fleet status:\n")
-        fleet.summary()
-        texttime(f"\n  🔧 Return to Dottie for repairs and try again.\n")
-
-        # Reset Game?
-        texttime(f"\n Would you like to attempt another mission? (y/n)")
-        
-        again = input("  > ").strip().lower()
-        if again == 'y':
-            main()  # Restart the game loop
+            # Remove ship from target list
+            targets.remove(selected)  # Remove the captured ship from the target list
+            
+            fleet.summary()
+            
         else:
-            texttime("\n  🚀 Thanks for playing Gone in 60 Parsecs! Safe travels, space pirate! 🌌\n")
+            texttime(f"\n\n  💀 Mission Failed. '{selected.name}' remains out of reach.")
+            
+            # Mission duration
+            time_for_mission = missionTimer(start_time)
+            texttime(time_for_mission)
 
+            # Print fleet status and send RTB message
+            texttime(f"\n\nCurrent fleet status:\n")
+            fleet.summary()
+            texttime(f"\n  🔧 Return to Dottie for repairs and try again.\n")
+
+        if len(targets) > 0:
+            print(len(targets))
+            # Reset Game?
+            texttime(f"\n Would you like to attempt another mission? (y/n)")
+            again = input("  > ").strip().lower()
+
+            # Reset game logic
+            if again == 'y':
+                game = True
+            else:
+                texttime("\n  🚀 Thanks for playing Gone in 60 Parsecs! Safe travels, space pirate! 🌌\n")
+                game = False
+                break
+        else:
+            texttime("\n  🚀 You've captured the entire fleet! Carry on with your day, space pirate. 🌌\n")
 
 if __name__ == "__main__":
     main()

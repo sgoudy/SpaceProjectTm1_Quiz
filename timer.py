@@ -7,24 +7,48 @@
 # ─────────────────────────────────────────────
 #  TIMED INPUT — 15 second live countdown
 # ─────────────────────────────────────────────
-
 from pytimedinput import timedInput
 from datetime import datetime
-
 from animation import slow_progress_bar, texttime
-def countdown():
-    texttime("\n⏳ Time remaining: 15 seconds\n")
-    texttime("Choose wisely (a/b/c/d): \n") 
+import time
+from pytimedinput import timedInput
 
-    user_text, timed_out = timedInput("", timeout=15)
-    # slow_progress_bar()  # Show the loading animation as a visual timer
+def get_strict_timed_choice():
+    """
+        Sets a 15 second time limit. Checks to make sure the input is valid
+        and returns a correction if not.
+        Returns: User Answer
+    """
+    valid_options = ['a', 'b', 'c', 'd']
+    total_timeout = 15
+    start_time = time.time()
     
-    if timed_out:
-        texttime("\n⏰ Time's up! No input received.")
-        answer = None
-    else:
-        answer = user_text.lower() 
-    return answer
+    while True:
+        # Calculate how much time is left
+        elapsed = time.time() - start_time
+        remaining = total_timeout - elapsed
+        
+        if remaining <= 0:
+            print("\n⏰ Time's up!")
+            return None
+
+        prompt = f"Choose wisely (a-d) [{int(remaining)}s left]: "
+        
+        # Pass the *remaining* time, not the full 15s
+        user_text, timed_out = timedInput(prompt, timeout=remaining, resetOnInput=False)
+        
+        if timed_out:
+            print("\n⏰ Time's up!")
+            return None
+        
+        choice = user_text.strip().lower()
+        
+        if choice in valid_options:
+            return choice
+        else:
+            print(f"❌ Invalid '{choice}'. Try again quickly!")
+            # Loop continues, but next timedInput will have less time    
+
 
 def missionTimer(start_time):
     end_time = datetime.now() 
