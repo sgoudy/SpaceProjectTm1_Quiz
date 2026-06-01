@@ -1,7 +1,7 @@
 import random
 import time
 from hackship import HackShip
-from quiz import QUESTION_BANK
+from questions import QUESTION_BANK
 from enemySS import EnemySpaceShip
 from homebase import Homebase
 from timer import get_strict_timed_choice #countdown,

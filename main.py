@@ -7,7 +7,7 @@ from hackship import HackShip
 # import random
 import random   
 from mission import run_hack_mission
-from quiz import QUESTION_BANK
+from questions import QUESTION_BANK
 from enemySS import EnemySpaceShip
 from homebase import Homebase
 from animation import texttime, slow_progress_bar
