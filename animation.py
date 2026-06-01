@@ -1,7 +1,13 @@
-"""@Authors: Charles, Jordan, Shelby, Robert, Jon"""
+"""@Authors: Charles, Jordan, Jon, Robert, Shelby
+Date: April Cohort 2026
+"""
+
+# ─────────────────────────────────────────────
+#  Animation
+# ─────────────────────────────────────────────
+
 import sys
 import time
-
 
 # Typing effect for the welcome message
 def texttime(words):

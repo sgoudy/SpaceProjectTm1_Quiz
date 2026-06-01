@@ -1,15 +1,13 @@
-"""@Authors: Charles, Jordan, Shelby, Robert, Jon"""
-# The user has a 15 second time limit to answer each question in the hack mission. 
-# If they fail to answer within the time limit, it counts as a wrong answer and damages their hull by 25%. 
-# The timer resets for each new question, giving them a fresh 15 seconds to respond. This adds an extra layer of challenge and urgency to the game, 
-# simulating the high-stakes environment of a space heist.
+"""@Authors: Charles, Jordan, Jon, Robert, Shelby
+Date: April Cohort 2026
+"""
 
 # ─────────────────────────────────────────────
 #  TIMED INPUT — 15 second live countdown
 # ─────────────────────────────────────────────
+
 from pytimedinput import timedInput
 from datetime import datetime
-from animation import slow_progress_bar, texttime
 import time
 from pytimedinput import timedInput
 

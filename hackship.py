@@ -1,6 +1,11 @@
+"""@Authors: Charles, Jordan, Jon, Robert, Shelby
+Date: April Cohort 2026
+"""
+
 # ─────────────────────────────────────────────
 #  CLASS: HackShip  (your Vehicle / Asset)
 # ─────────────────────────────────────────────
+
 class HackShip:
     """
     Your personal heist ship launched from Dottie.

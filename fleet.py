@@ -1,7 +1,17 @@
-# Create a fleet of one spaceship to begin with. As we answer questions correctly, we can add those ships to our fleet. Each ship will have its own unique attributes and capabilities.
+"""@Authors: Charles, Jordan, Jon, Robert, Shelby
+Date: April Cohort 2026
+"""
+
+# ─────────────────────────────────────────────
+#  CLASS: Fleet
+# ─────────────────────────────────────────────
+
 from animation import texttime
 
 class Fleet():
+    """
+    A class to represent a fleet of spaceships.
+    """
     def __init__(self):
         self.ships = []
     

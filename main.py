@@ -1,28 +1,22 @@
-"""@title: main.py
-Authors: Charles, Jordan, Jon, Robert, Shelby
+"""@Authors: Charles, Jordan, Jon, Robert, Shelby
 Date: April Cohort 2026
 """
-import time
-from hackship import HackShip
-# import random
-import random   
-from mission import run_hack_mission
-from questions import QUESTION_BANK
-from enemySS import EnemySpaceShip
-from homebase import Homebase
-from animation import texttime, slow_progress_bar
-# from timer import countdown
-from fleet import fleet
-from datetime import datetime
-from intro import intro_scroll
-from datetime import datetime
-from timer import missionTimer
-
 
 # ─────────────────────────────────────────────
 #  MAIN PROGRAM
 # ─────────────────────────────────────────────
 
+import time
+from hackship import HackShip
+from mission import run_hack_mission
+from enemySS import EnemySpaceShip
+from homebase import Homebase
+from animation import texttime
+from fleet import fleet
+from datetime import datetime
+from intro import intro_scroll
+from datetime import datetime
+from timer import missionTimer
 
 def main():
 
@@ -126,7 +120,7 @@ def main():
             texttime(f"\n  🔧 Return to Dottie for repairs and try again.\n")
 
         if len(targets) > 0:
-            
+
             # Reset Game?
             texttime(f"\n Would you like to attempt another mission? (y/n)")
             again = input("  > ").strip().lower()

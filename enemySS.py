@@ -1,8 +1,12 @@
+"""@Authors: Charles, Jordan, Jon, Robert, Shelby
+Date: April Cohort 2026
+"""
+
 # ─────────────────────────────────────────────
 #  CLASS: EnemySpaceShip  (Destination / Target)
 # ─────────────────────────────────────────────
-import time
 
+import time
 
 class EnemySpaceShip:
     """

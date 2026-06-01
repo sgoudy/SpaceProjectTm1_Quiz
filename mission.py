@@ -1,15 +1,19 @@
+"""@Authors: Charles, Jordan, Jon, Robert, Shelby
+Date: April Cohort 2026
+"""
+
+# ─────────────────────────────────────────────
+#  MISSION: HACK A SHIP
+# ─────────────────────────────────────────────
+
 import random
 import time
 from hackship import HackShip
 from questions import QUESTION_BANK
 from enemySS import EnemySpaceShip
-from homebase import Homebase
 from timer import get_strict_timed_choice #countdown,
 from animation import texttime
 
-# ─────────────────────────────────────────────
-#  MISSION: HACK A SHIP
-# ─────────────────────────────────────────────
 def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
     """
     Run the hacking mission against a target ship.

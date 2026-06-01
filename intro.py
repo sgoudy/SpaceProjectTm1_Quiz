@@ -1,3 +1,11 @@
+"""@Authors: Charles, Jordan, Jon, Robert, Shelby
+Date: April Cohort 2026
+"""
+
+# ─────────────────────────────────────────────
+#  INTRODUCTION SCROLL
+# ─────────────────────────────────────────────
+
 # --- Star Wars Style Scrolling Intro ---
 import time
 

@@ -1,6 +1,11 @@
+"""@Authors: Charles, Jordan, Jon, Robert, Shelby
+Date: April Cohort 2026
+"""
+
 # ─────────────────────────────────────────────
 #  CLASS: Homebase
 # ─────────────────────────────────────────────
+
 class Homebase:
     """
     Represents your team's base of operations.
