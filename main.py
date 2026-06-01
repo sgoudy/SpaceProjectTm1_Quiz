@@ -26,27 +26,28 @@ from timer import missionTimer
 
 def main():
 
-    # texttime("\n" + "★" * 25+"       GONE IN 60 PARSECS >> Space Heist | Hack or Be Hacked       "+"★" * 25+"\n\n")
+    texttime("\n" + "★" * 25+"       GONE IN 60 PARSECS >> Space Heist | Hack or Be Hacked       "+"★" * 25+"\n\n")
 
-    # intro_scroll()
+    intro_scroll()
 
     # --- Setup Homebase ---
     texttime("\n\n   ...Initializing Dottie's Homebase...\n")
     time.sleep(1.5)
     # Instantiating the homebase with specific attributes
     dottie = Homebase("Dottie", "Asteroid near Pluto, Milky Way", 12)
-    # for line in dottie.summary():
-    #     print(line)
-    #     time.sleep(0.3)
+    for line in dottie.summary():
+        print(line)
+        time.sleep(0.3)
 
     # --- Setup Player Ship ---
     texttime("\n\n   ...Initializing Your Hack Ship on Dottie...\n")
     time.sleep(1.5)
+
     # Instantiating the player's hack ship with specific attributes
     player_ship = HackShip(name="The Phantom Byte",speed=4.2,capacity=6,weapons=["EMP Cannon", "Cyber Spike", "Signal Jammer"]    )
-    # for line in player_ship.summary():
-    #     print(line)
-    #     time.sleep(0.3)
+    for line in player_ship.summary():
+        print(line)
+        time.sleep(0.3)
 
    
     # --- Display Targets ---
@@ -63,10 +64,10 @@ def main():
         texttime("\n" + "─" * 25 +" 📋 ACTIVE TARGETS  "+"─" * 25 +"\n")
        
         # start=1 makes the index begin at 1 instead of the default 0
-        # for i, t in enumerate(targets, start=1):
-        #     print(f"{i}: ", end='', flush=True)
-        #     t.summary()
-        #     time.sleep(0.3)
+        for i, t in enumerate(targets, start=1):
+            print(f"{i}: ", end='', flush=True)
+            t.summary()
+            time.sleep(0.3)
 
         number_list = list(range(len(targets)))
         numberListPlusOne = [item + 1 for item in number_list]  # More concise list comprehension
@@ -96,7 +97,7 @@ def main():
 
         # --- Final Status ---
         texttime("\n" + "═" * 25+"      📊 GENERATING END OF MISSION REPORT       "+"═" * 25 + "\n")
-        result = True
+        
         if result:
             
             # Mission duration
@@ -125,7 +126,7 @@ def main():
             texttime(f"\n  🔧 Return to Dottie for repairs and try again.\n")
 
         if len(targets) > 0:
-            print(len(targets))
+            
             # Reset Game?
             texttime(f"\n Would you like to attempt another mission? (y/n)")
             again = input("  > ").strip().lower()
