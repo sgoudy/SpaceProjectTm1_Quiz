@@ -1,7 +1,12 @@
+"""@Authors: Charles, Jordan, Jon, Robert, Shelby
+Date: April Cohort 2026
 """
-questions.py
-============
-Gone in 60 Parsecs — Cybersecurity Question Bank
+
+  # ─────────────────────────────────────────────
+  #  TOPIC 1: NETWORK SECURITY (50 questions)
+  # ─────────────────────────────────────────────
+
+"""Cybersecurity Question Bank
 50 questions per topic | 4 topics | 200 questions total
 
 Topics:
@@ -16,9 +21,7 @@ correct_answer is the letter only: "a", "b", "c", or "d"
 
 QUESTION_BANK = {
 
-    # ─────────────────────────────────────────────
-    #  TOPIC 1: NETWORK SECURITY (50 questions)
-    # ─────────────────────────────────────────────
+
     "Network Security": [
         ("What does a firewall primarily do?", "b",
          ["a) Speeds up your internet",

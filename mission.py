@@ -48,7 +48,6 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
         for choice in choices:
             texttime(f"    {choice}\n")
 
-        # response = countdown()
         response = get_strict_timed_choice()
         if response is None:
             play_timeout()
@@ -65,6 +64,7 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
             wrong += 1
             player_ship.take_damage(25)
             texttime(f"\n  ❌ WRONG!  Hull damaged → {player_ship.name}'s hull now at {player_ship.hull}%\n")
+            texttime(f"\n  💡 The correct answer was: {answer.upper()}\n\n")
 
         texttime(f"  [Score: {correct} correct / {wrong} wrong]\n")
 

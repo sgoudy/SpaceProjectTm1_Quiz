@@ -11,6 +11,8 @@ from animation import texttime
 class Fleet():
     """
     A class to represent a fleet of spaceships.
+    Attributes:
+    ships (list): A list to hold the spaceships in the fleet.
     """
     def __init__(self):
         self.ships = []

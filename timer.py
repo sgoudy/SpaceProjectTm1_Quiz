@@ -12,10 +12,9 @@ import time
 from sound import play_warning
 
 def get_strict_timed_choice():
-    """
-        Sets a 15 second time limit. Checks to make sure the input is valid
+    """Sets a 15 second time limit. Checks to make sure the input is valid
         and returns a correction if not.
-        Returns: User Answer (or None if timed out)
+       Returns: User Answer (or None if timed out)
     """
     valid_options = ['a', 'b', 'c', 'd']
     total_timeout = 15
@@ -52,6 +51,11 @@ def get_strict_timed_choice():
 
 
 def missionTimer(start_time):
+    '''Calculates and formats the duration of a mission based on the start time.
+    Attributes:    
+     start_time (datetime): The time when the mission started.
+    Returns a string in the format "MM:SS".
+    '''
     end_time = datetime.now() 
     duration = end_time - start_time
    
