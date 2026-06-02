@@ -12,6 +12,7 @@ from mission import run_hack_mission
 from enemySS import EnemySpaceShip
 from homebase import Homebase
 from animation import texttime
+from console_utils import banner, section_header
 from fleet import fleet
 from datetime import datetime
 from intro import intro_scroll
@@ -20,12 +21,16 @@ from sound import init_sounds, play_startup
 
 def main():
 
-    init_sounds()    # generate WAV files on first run (silent if already exist)
-    play_startup()   # fanfare plays while the title banner prints
+    # generate WAV files on first run (silent if already exist)
+    init_sounds()    
+
+    # fanfare plays while the title banner prints
+    play_startup()   
 
     texttime("\n" + "★" * 25+"       GONE IN 60 PARSECS >> Space Heist | Hack or Be Hacked       "+"★" * 25+"\n\n")
 
-    intro_scroll()
+    # Run the intro scroll animation
+    intro_scroll() 
 
     # --- Setup Homebase ---
     texttime("\n\n   ...Initializing Dottie's Homebase...\n")
@@ -45,7 +50,6 @@ def main():
     for line in player_ship.summary():
         print(line)
         time.sleep(0.3)
-
    
     # --- Display Targets ---
     # Instantiating the target ships with specific attributes
@@ -57,8 +61,10 @@ def main():
         ]
 
     game = True
+
+    # Run the game while there are still targets to hack and steal
     while game and len(targets) > 0: 
-        texttime("\n" + "─" * 25 +" 📋 ACTIVE TARGETS  "+"─" * 25 +"\n")
+        texttime(section_header("📋 ACTIVE TARGETS"))
        
         # start=1 makes the index begin at 1 instead of the default 0
         for i, t in enumerate(targets, start=1):
@@ -79,21 +85,22 @@ def main():
                 
                 if choice_int in numberListPlusOne:
                     selected = targets[choice_int - 1]
-                    print("\n" + "═" * 25+ f"  🔓 HACK MISSION: TARGET = {selected.name} [{selected.codename}] "+"═" * 25+"\n\n")
+                    texttime(banner(f"🔓 HACK MISSION: TARGET = {selected.name} [{selected.codename}]") )
                     break
                 else:
-                    print("Invalid choic2e: Number not in the list.")
+                    print("Invalid choice: number not in the list.")
                     
             except ValueError:
                 print("Invalid input: Please enter a valid number.")
-
-        # --- Run the Mission ---
+        
+        # Establish a start time so we can time the mission
         start_time = datetime.now()
 
+        # --- Run the Mission ---
         result = run_hack_mission(player_ship, selected)
 
         # --- Final Status ---
-        texttime("\n" + "═" * 25+"      📊 GENERATING END OF MISSION REPORT       "+"═" * 25 + "\n")
+        texttime(banner("📊 GENERATING END OF MISSION REPORT"))
         
         if result:
             
@@ -111,6 +118,7 @@ def main():
             fleet.summary()
             
         else:
+            
             texttime(f"\n\n  💀 Mission Failed. '{selected.name}' remains out of reach.")
             
             # Mission duration

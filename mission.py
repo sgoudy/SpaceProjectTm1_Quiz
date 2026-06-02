@@ -13,6 +13,7 @@ from questions import QUESTION_BANK
 from enemySS import EnemySpaceShip
 from timer import get_strict_timed_choice
 from animation import texttime
+from console_utils import banner, section_header
 from sound import play_correct, play_wrong, play_timeout
 
 def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
@@ -36,14 +37,14 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
     texttime(f"\n  Answer 4 questions correctly to steal the ship!\n")
     texttime(f"  But beware — wrong answers damage YOUR hull.\n")
 
+    # Select 6 random questions from the target's cyber topic
     questions = random.sample(QUESTION_BANK[target.cyber_topic], 6)
 
     correct = 0
     wrong = 0
 
     for i, (question, answer, choices) in enumerate(questions, 1):
-        print(f"\n────────────────────────────────────────────────────────────")
-        texttime(f"──────────── Question {i} of 6 ───────────────────────────────\n\n")
+        texttime(section_header(f"Question {i} of 6"))
         texttime(f"  {question}\n")
         for choice in choices:
             texttime(f"    {choice}\n")
@@ -70,21 +71,18 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
 
         # Check win condition
         if correct >= 4:
-            texttime("\n" + "═" * 25 + " 🏆 MISSION SUCCESS! "+ "═" * 25 + "\n\n")
+            texttime(banner("🏆 MISSION SUCCESS!"))
             texttime(f"  You hacked through {target.name}'s defenses!\n")
             texttime(f"  The {target.name} is YOURS. I will add it to your fleet. 🚀\n")
             return True
 
         # Check lose condition
         if player_ship.is_destroyed():
-            texttime("\n"+"═" * 25 + "  💥 MISSION FAILED! "+ "═" * 25 + "\n")
+            texttime(banner("💥 MISSION FAILED!"))
             texttime(f"  {player_ship.name} has been destroyed!\n")
             texttime(f"  {target.name}'s security systems overwhelmed you.\n")
             return False
 
     # Ran out of questions without winning
-    texttime("═" * 15+"\n")
-    texttime("  ❌ MISSION FAILED::  ")
-    texttime(f"{target.name} remains out of reach... for now.")
-    texttime("═" * 15 + "\n")
+    texttime(banner(f"❌ MISSION FAILED: {target.name} remains out of reach... for now."))
     return False

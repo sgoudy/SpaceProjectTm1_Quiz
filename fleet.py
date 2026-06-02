@@ -7,6 +7,7 @@ Date: April Cohort 2026
 # ─────────────────────────────────────────────
 
 from animation import texttime
+from console_utils import banner
 
 class Fleet():
     """
@@ -21,7 +22,7 @@ class Fleet():
         self.ships.append(ship)
     
     def summary(self):
-        print("\n" + "═" * 31+"   🚀  YOUR CURRENT FLEET STATUS    "+"═" * 31 + "\n")
+        print(banner("🚀 YOUR CURRENT FLEET STATUS"), end="")
         for ship in self.ships:
             texttime(f" 🚀 {ship.name}\n")
 
