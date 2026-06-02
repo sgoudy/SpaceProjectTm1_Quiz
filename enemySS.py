@@ -23,6 +23,7 @@ class EnemySpaceShip:
 
     def __init__(self, name: str, codename: str, location: str,
                  distance: float, cyber_topic: str):
+        """Initializes the EnemySpaceShip with its attributes."""
         self.name = name
         self.codename = codename
         self.location = location
@@ -37,9 +38,11 @@ class EnemySpaceShip:
             self.defenses = 0
 
     def is_taken(self):
+        """Checks if the ship's defenses have been fully breached."""
         return self.defenses <= 0
 
     def summary(self):
+        """Prints a summary of the target ship's current status."""
         print(f"\n🎯 TARGET SHIP: {self.name}  [{self.codename}]")
         time.sleep(0.3)
         print(f"   Location  : {self.location}")

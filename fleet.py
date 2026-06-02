@@ -16,12 +16,15 @@ class Fleet():
     ships (list): A list to hold the spaceships in the fleet.
     """
     def __init__(self):
+        """Initializes the Fleet with an empty list of ships."""
         self.ships = []
     
     def add_ship(self, ship):
+        """Adds a ship to the fleet."""
         self.ships.append(ship)
     
     def summary(self):
+        """Prints a summary of the fleet's current status."""
         print(banner("🚀 YOUR CURRENT FLEET STATUS"), end="")
         for ship in self.ships:
             texttime(f" 🚀 {ship.name}\n")

@@ -43,23 +43,31 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
     correct = 0
     wrong = 0
 
+    # Quiz flow
     for i, (question, answer, choices) in enumerate(questions, 1):
         texttime(section_header(f"Question {i} of 6"))
         texttime(f"  {question}\n")
         for choice in choices:
             texttime(f"    {choice}\n")
 
+        # Validates input and enforces time limit
         response = get_strict_timed_choice()
+        
+        # No response means timeout, which counts as wrong
         if response is None:
             play_timeout()
             wrong += 1
             player_ship.take_damage(25)
             texttime(f"\n  ⏰ TIME'S UP!  Hull damaged → {player_ship.name}'s hull now at {player_ship.hull}%\n")
+        
+        # Correct answer and damage target's defenses
         elif response == answer:
             play_correct()
             correct += 1
             target.breach(25)
             texttime(f"\n  ✅ CORRECT! Defense breached → {target.name}'s defenses now at {target.defenses}%\n")
+        
+        # Wrong answer and damage player's hull
         else:
             play_wrong()
             wrong += 1

@@ -1,3 +1,11 @@
+"""@Authors: Charles, Jordan, Jon, Robert, Shelby
+Date: April Cohort 2026
+"""
+
+# ─────────────────────────────────────────────
+#  Display Prettifier
+# ─────────────────────────────────────────────
+
 """Utilities for consistent console banners and headers."""
 
 BANNER_WIDTH = 70

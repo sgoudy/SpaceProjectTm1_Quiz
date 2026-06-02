@@ -17,6 +17,7 @@ class Homebase:
     """
 
     def __init__(self, name: str, location: str, SOB: int):
+        """Initializes the Homebase with its attributes."""
         self.name = name
         self.location = location
         self.SOB = SOB

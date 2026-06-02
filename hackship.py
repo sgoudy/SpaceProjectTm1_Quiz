@@ -19,6 +19,7 @@ class HackShip:
     """
 
     def __init__(self, name: str, speed: float, capacity: int, weapons: list):
+        """Initializes the HackShip with its attributes."""
         self.name = name
         self.speed = speed
         self.capacity = capacity
@@ -32,6 +33,7 @@ class HackShip:
             self.hull = 0
 
     def is_destroyed(self):
+        """Checks if the ship's hull integrity has reached 0%."""
         return self.hull <= 0
 
     def summary(self):
