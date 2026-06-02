@@ -11,8 +11,9 @@ import time
 from hackship import HackShip
 from questions import QUESTION_BANK
 from enemySS import EnemySpaceShip
-from timer import get_strict_timed_choice #countdown,
+from timer import get_strict_timed_choice
 from animation import texttime
+from sound import play_correct, play_wrong, play_timeout
 
 def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
     """
@@ -49,12 +50,18 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
 
         # response = countdown()
         response = get_strict_timed_choice()
-        if response == answer:
+        if response is None:
+            play_timeout()
+            wrong += 1
+            player_ship.take_damage(25)
+            texttime(f"\n  ⏰ TIME'S UP!  Hull damaged → {player_ship.name}'s hull now at {player_ship.hull}%\n")
+        elif response == answer:
+            play_correct()
             correct += 1
             target.breach(25)
             texttime(f"\n  ✅ CORRECT! Defense breached → {target.name}'s defenses now at {target.defenses}%\n")
-            
         else:
+            play_wrong()
             wrong += 1
             player_ship.take_damage(25)
             texttime(f"\n  ❌ WRONG!  Hull damaged → {player_ship.name}'s hull now at {player_ship.hull}%\n")

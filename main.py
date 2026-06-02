@@ -15,10 +15,13 @@ from animation import texttime
 from fleet import fleet
 from datetime import datetime
 from intro import intro_scroll
-from datetime import datetime
 from timer import missionTimer
+from sound import init_sounds, play_startup
 
 def main():
+
+    init_sounds()    # generate WAV files on first run (silent if already exist)
+    play_startup()   # fanfare plays while the title banner prints
 
     texttime("\n" + "★" * 25+"       GONE IN 60 PARSECS >> Space Heist | Hack or Be Hacked       "+"★" * 25+"\n\n")
 
