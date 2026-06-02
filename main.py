@@ -1,0 +1,150 @@
+"""@Authors: Charles, Jordan, Jon, Robert, Shelby
+Date: April Cohort 2026
+"""
+
+# ─────────────────────────────────────────────
+#  MAIN PROGRAM
+# ─────────────────────────────────────────────
+
+import time
+from hackship import HackShip
+from mission import run_hack_mission
+from enemySS import EnemySpaceShip
+from homebase import Homebase
+from animation import texttime
+from console_utils import banner, section_header
+from fleet import fleet
+from datetime import datetime
+from intro import intro_scroll
+from timer import missionTimer
+from sound import init_sounds, play_startup
+
+def main():
+
+    # generate WAV files on first run (silent if already exist)
+    init_sounds()    
+
+    # fanfare plays while the title banner prints
+    play_startup()   
+
+    texttime("\n" + "★" * 25+"       GONE IN 60 PARSECS >> Space Heist | Hack or Be Hacked       "+"★" * 25+"\n\n")
+
+    # Run the intro scroll animation
+    intro_scroll() 
+
+    # --- Setup Homebase ---
+    texttime("\n\n   ...Initializing Dottie's Homebase...\n")
+    time.sleep(1.5)
+    # Instantiating the homebase with specific attributes
+    dottie = Homebase("Dottie", "Asteroid near Pluto, Milky Way", 12)
+    for line in dottie.summary():
+        print(line)
+        time.sleep(0.3)
+
+    # --- Setup Player Ship ---
+    texttime("\n\n   ...Initializing Your Hack Ship on Dottie...\n")
+    time.sleep(1.5)
+
+    # Instantiating the player's hack ship with specific attributes
+    player_ship = HackShip(name="The Phantom Byte",speed=4.2,capacity=6,weapons=["EMP Cannon", "Cyber Spike", "Signal Jammer"]    )
+    for line in player_ship.summary():
+        print(line)
+        time.sleep(0.3)
+   
+    # --- Display Targets ---
+    # Instantiating the target ships with specific attributes
+    targets = [
+            EnemySpaceShip("Enterprise",  "Top Gun",   "Planet Vulcan",       2.3,  "Network Security"),
+            EnemySpaceShip("Eleanor",     "ANDROMEDA", "Planet Vega",         5.1,  "Encryption"),
+            EnemySpaceShip("Tardis",      "Tesla",     "Jupiter's Moon: Io",  1.8,  "Social Engineering"),
+            EnemySpaceShip("Serenity",    "Firefly",   "Saturn's Moon: Titan",1.2,  "Malware & Intrusion"),
+        ]
+
+    game = True
+
+    # Run the game while there are still targets to hack and steal
+    while game and len(targets) > 0: 
+        texttime(section_header("📋 ACTIVE TARGETS"))
+       
+        # start=1 makes the index begin at 1 instead of the default 0
+        for i, t in enumerate(targets, start=1):
+            print(f"{i}: ", end='', flush=True)
+            t.summary()
+            time.sleep(0.3)
+
+        number_list = list(range(len(targets)))
+        numberListPlusOne = [item + 1 for item in number_list]  # More concise list comprehension
+
+        # Have the player choose which ship based on number of ships in list
+        while True:
+            choice = input(f"\n  Select your target {numberListPlusOne}: ")
+            
+            try:
+                # Convert input to integer immediately
+                choice_int = int(choice)
+                
+                if choice_int in numberListPlusOne:
+                    selected = targets[choice_int - 1]
+                    texttime(banner(f"🔓 HACK MISSION: TARGET = {selected.name} [{selected.codename}]") )
+                    break
+                else:
+                    print("Invalid choice: number not in the list.")
+                    
+            except ValueError:
+                print("Invalid input: Please enter a valid number.")
+        
+        # Establish a start time so we can time the mission
+        start_time = datetime.now()
+
+        # --- Run the Mission ---
+        result = run_hack_mission(player_ship, selected)
+
+        # --- Final Status ---
+        texttime(banner("📊 GENERATING END OF MISSION REPORT"))
+        
+        if result:
+            
+            # Mission duration
+            time_for_mission = missionTimer(start_time)
+            texttime(time_for_mission)
+            
+            # Add ship to fleet
+            texttime(f"\n  🎉 '{selected.name}' has been added to the Gone in 60 Parsecs fleet!\n")
+            fleet.add_ship(selected)
+
+            # Remove ship from target list
+            targets.remove(selected)  # Remove the captured ship from the target list
+            
+            fleet.summary()
+            
+        else:
+            
+            texttime(f"\n\n  💀 Mission Failed. '{selected.name}' remains out of reach.")
+            
+            # Mission duration
+            time_for_mission = missionTimer(start_time)
+            texttime(time_for_mission)
+
+            # Print fleet status and send RTB message
+            texttime(f"\n\nCurrent fleet status:\n")
+            fleet.summary()
+            texttime(f"\n  🔧 Return to Dottie for repairs and try again.\n")
+
+        if len(targets) > 0:
+
+            # Reset Game?
+            texttime(f"\n Would you like to attempt another mission? (y/n)")
+            again = input("  > ").strip().lower()
+
+            # Reset game logic
+            if again == 'y':
+                game = True
+            else:
+                texttime("\n  🚀 Thanks for playing Gone in 60 Parsecs! Safe travels, space pirate! 🌌\n")
+                game = False
+                break
+        else:
+            texttime("\n  🚀 You've captured the entire fleet! Carry on with your day, space pirate. 🌌\n")
+
+if __name__ == "__main__":
+    main()
