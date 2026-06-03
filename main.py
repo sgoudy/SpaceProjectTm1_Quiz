@@ -22,7 +22,7 @@ from sound import init_sounds, play_startup
 def main():
 
     # generate WAV files on first run (silent if already exist)
-    init_sounds()    
+    # init_sounds()    
 
     # fanfare plays while the title banner prints
     play_startup()   
@@ -30,7 +30,7 @@ def main():
     texttime("\n" + "★" * 25+"       GONE IN 60 PARSECS >> Space Heist | Hack or Be Hacked       "+"★" * 25+"\n\n")
 
     # Run the intro scroll animation
-    intro_scroll() 
+    # intro_scroll() 
 
     # --- Setup Homebase ---
     texttime("\n\n   ...Initializing Dottie's Homebase...\n")
@@ -55,7 +55,7 @@ def main():
     # Instantiating the target ships with specific attributes
     targets = [
             EnemySpaceShip("Enterprise",  "Top Gun",   "Planet Vulcan",       2.3,  "Network Security"),
-            EnemySpaceShip("Eleanor",     "ANDROMEDA", "Planet Vega",         5.1,  "Encryption"),
+            EnemySpaceShip("Andromeda",     "Eleanor", "Planet Vega",         5.1,  "Encryption"),
             EnemySpaceShip("Tardis",      "Tesla",     "Jupiter's Moon: Io",  1.8,  "Social Engineering"),
             EnemySpaceShip("Serenity",    "Firefly",   "Saturn's Moon: Titan",1.2,  "Malware & Intrusion"),
         ]
@@ -106,7 +106,7 @@ def main():
             
             # Mission duration
             time_for_mission = missionTimer(start_time)
-            texttime(time_for_mission)
+            texttime(f"\n{time_for_mission}")
             
             # Add ship to fleet
             texttime(f"\n  🎉 '{selected.name}' has been added to the Gone in 60 Parsecs fleet!\n")

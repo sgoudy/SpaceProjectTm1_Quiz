@@ -42,7 +42,7 @@ def get_strict_timed_choice():
             play_warning()
             warning_played = True
 
-        prompt = f"Choose wisely (a-d) [{int(remaining)}s left]: "
+        prompt = f"\nChoose wisely (a-d) [{int(remaining)}s left]: "
 
         # Get user input with remaining time as timeout
         user_text, timed_out = timedInput(prompt, timeout=remaining, resetOnInput=False)
