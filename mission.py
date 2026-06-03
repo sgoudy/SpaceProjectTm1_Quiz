@@ -25,7 +25,7 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
     - Win condition: 4 correct answers (defenses reach 0%)
     - Lose condition: player ship hull reaches 0%
     """
-    missionBrief = [f"  Location : {target.location}",
+    missionBrief = [f"\n  Location : {target.location}",
                     f"  Distance : {target.distance} parsecs",
                     f"  Topic    : {target.cyber_topic}",
                     f"  Your Hull: {player_ship.hull}%"]
@@ -45,9 +45,10 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
 
     for i, (question, answer, choices) in enumerate(questions, 1):
         texttime(section_header(f"Question {i} of 6"))
-        texttime(f"  {question}\n")
+        texttime(f"\n  {question}\n\n")
         for choice in choices:
-            texttime(f"    {choice}\n")
+            print(f"    {choice}")
+            time.sleep(0.5)
 
         response = get_strict_timed_choice()
         if response is None:
@@ -72,15 +73,15 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
         # Check win condition
         if correct >= 4:
             texttime(banner("🏆 MISSION SUCCESS!"))
-            texttime(f"  You hacked through {target.name}'s defenses!\n")
-            texttime(f"  The {target.name} is YOURS. I will add it to your fleet. 🚀\n")
+            print(f"\n  You hacked through {target.name}'s defenses!\n")
+            print(f"  The {target.name} is YOURS. I will add it to your fleet. 🚀\n")
             return True
 
         # Check lose condition
         if player_ship.is_destroyed():
             texttime(banner("💥 MISSION FAILED!"))
-            texttime(f"  {player_ship.name} has been destroyed!\n")
-            texttime(f"  {target.name}'s security systems overwhelmed you.\n")
+            print(f"\n  {player_ship.name} has been destroyed!\n")
+            print(f"  {target.name}'s security systems overwhelmed you.\n")
             return False
 
     # Ran out of questions without winning
