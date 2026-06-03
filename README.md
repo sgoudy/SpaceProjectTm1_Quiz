@@ -3,4 +3,4 @@
 ## Program START
 
 in terminal:
-./run.bat
+.\run.bat

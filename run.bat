@@ -1,2 +1,3 @@
 @echo off
-start "" python "%~dp0main.py"
+start /wait "" python "%~dp0main.py"
+pause

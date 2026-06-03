@@ -36,7 +36,7 @@ def main():
     texttime("\n\n   ...Initializing Dottie's Homebase...\n")
     time.sleep(1.5)
     # Instantiating the homebase with specific attributes
-    dottie = Homebase("Dottie", "Asteroid near Pluto, Milky Way", 12)
+    dottie = Homebase("Dottie", "Asteroid near Pluto, Milky Way", 5)
     for line in dottie.summary():
         print(line)
         time.sleep(0.3)
@@ -115,6 +115,10 @@ def main():
             # Remove ship from target list
             targets.remove(selected)  # Remove the captured ship from the target list
             
+            # Your hull status
+            texttime(f"\n  🛠️  '{player_ship.name}' hull status: {player_ship.hull}%\n")
+
+            # Print fleet status
             fleet.summary()
             
         else:

@@ -26,6 +26,7 @@ class Fleet():
     def summary(self):
         """Prints a summary of the fleet's current status."""
         print(banner("🚀 YOUR CURRENT FLEET STATUS"), end="")
+        print("\n")
         for ship in self.ships:
             texttime(f" 🚀 {ship.name}\n")
 
