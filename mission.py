@@ -82,14 +82,16 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
         if correct >= 4:
             texttime(banner("🏆 MISSION SUCCESS!"))
             print(f"\n  You hacked through {target.name}'s defenses!\n")
-            print(f"  The {target.name} is YOURS. I will add it to your fleet. 🚀\n")
+            time.sleep(0.5)
+            print(f"  The {target.name} is YOURS. I will add it to your fleet. 🚀")
             return True
 
         # Check lose condition
         if player_ship.is_destroyed():
             texttime(banner("💥 MISSION FAILED!"))
             print(f"\n  {player_ship.name} has been destroyed!\n")
-            print(f"  {target.name}'s security systems overwhelmed you.\n")
+            time.sleep(0.5)
+            print(f"  {target.name}'s security systems overwhelmed you.")
             return False
 
     # Ran out of questions without winning

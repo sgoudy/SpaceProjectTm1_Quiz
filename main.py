@@ -126,7 +126,7 @@ def main():
             texttime(time_for_mission)
 
             # Print fleet status and send RTB message
-            texttime(f"\n\nCurrent fleet status:\n")
+            texttime(f"\n\nCurrent fleet status:\n\n")
             fleet.summary()
             texttime(f"\n  🔧 Return to Dottie for repairs and try again.\n")
 
