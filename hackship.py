@@ -8,8 +8,7 @@ Date: April Cohort 2026
 
 class HackShip:
     """
-    Your personal heist ship launched from Dottie.
-
+    Our personal heist ship launched from Dottie.
     Attributes:
         name (str): Ship name.
         speed (float): Speed in parsecs per hour.

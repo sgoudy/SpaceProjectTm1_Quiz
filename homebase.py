@@ -8,8 +8,7 @@ Date: April Cohort 2026
 
 class Homebase:
     """
-    Represents your team's base of operations.
-
+    Represents our team's base of operations.
     Attributes:
         name (str): Name of the homebase.
         location (str): Where the homebase is located.

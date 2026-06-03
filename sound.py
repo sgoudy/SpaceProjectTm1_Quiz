@@ -31,6 +31,13 @@ def _make_wav(filepath: str, notes: list):
     Each note: (freq_hz, duration_sec, volume_0_to_1, wave_type)
       wave_type: 'sine' | 'square' | 'sawtooth'
       freq_hz=0  → silence
+    Attributes:
+    filepath (str): Path to save the generated WAV file.
+    notes (list): A list of tuples, each containing:
+      - freq_hz (int): Frequency in Hertz.
+      - duration_sec (float): Duration in seconds.
+      - volume_0_to_1 (float): Volume level from 0 to 1.
+      - wave_type (str): Type of waveform ('sine', 'square', or 'sawtooth').
     """
     samples = []
     for freq, duration, volume, wtype in notes:
