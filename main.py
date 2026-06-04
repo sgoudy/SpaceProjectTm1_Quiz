@@ -22,7 +22,7 @@ from sound import init_sounds, play_startup
 def main():
 
     # generate WAV files on first run (silent if already exist)
-    # init_sounds()    
+    init_sounds()    
 
     # fanfare plays while the title banner prints
     play_startup()   
@@ -30,7 +30,7 @@ def main():
     texttime("\n" + "★" * 25+"       GONE IN 60 PARSECS >> Space Heist | Hack or Be Hacked       "+"★" * 25+"\n\n")
 
     # Run the intro scroll animation
-    # intro_scroll() 
+    intro_scroll() 
 
     # --- Setup Homebase ---
     texttime("\n\n   ...Initializing Dottie's Homebase...\n")
