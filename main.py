@@ -72,8 +72,9 @@ def main():
             t.summary()
             time.sleep(0.3)
 
+        # Logic for numbering enemy ships for user selection
         number_list = list(range(len(targets)))
-        numberListPlusOne = [item + 1 for item in number_list]  # More concise list comprehension
+        numberListPlusOne = [item + 1 for item in number_list]  
 
         # Have the player choose which ship based on number of ships in list
         while True:
@@ -96,7 +97,7 @@ def main():
         # Establish a start time so we can time the mission
         start_time = datetime.now()
 
-        # --- Run the Mission ---
+        # --- Run the Mission/Quiz ---
         result = run_hack_mission(player_ship, selected)
 
         # --- Final Status ---
