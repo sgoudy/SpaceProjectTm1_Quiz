@@ -6,10 +6,53 @@ Date: April Cohort 2026
 #  TIMED FUNCTIONS
 # ─────────────────────────────────────────────
 
-from pytimedinput import timedInput
 from datetime import datetime
 import time
+import os
+import sys
 from sound import play_warning
+
+# Cross-platform timed input using polling
+# Works on Linux and Windows without leaving input threads behind.
+def timedInput(prompt: str, timeout: float, resetOnInput: bool = False) -> tuple:
+    """
+    Gets user input with a timeout.
+    Returns: (user_input_text, timed_out_bool)
+    """
+    if os.name == 'nt':
+        import msvcrt
+        buffer = []
+        start_time = time.time()
+
+        while True:
+            if msvcrt.kbhit():
+                char = msvcrt.getwche()
+                if char in ('\r', '\n'):
+                    sys.stdout.write('\n')
+                    return (''.join(buffer), False)
+                if char == '\b':
+                    if buffer:
+                        buffer.pop()
+                        sys.stdout.write('\b \b')
+                        sys.stdout.flush()
+                    continue
+                buffer.append(char)
+            if time.time() - start_time >= timeout:
+                sys.stdout.write('\n')
+                sys.stdout.flush()
+                return ('', True)
+            time.sleep(0.01)
+    else:
+        import select
+        ready, _, _ = select.select([sys.stdin], [], [], timeout)
+        if ready:
+            line = sys.stdin.readline()
+            if line == '':
+                return ('', False)
+            return (line.rstrip('\n'), False)
+        sys.stdout.write('\n')
+        sys.stdout.flush()
+        return ('', True)
 
 # ─────────────────────────────────────────────
 #  TIMED INPUT — 15 second live countdown
@@ -32,9 +75,8 @@ def get_strict_timed_choice():
         elapsed   = time.time() - start_time
         remaining = total_timeout - elapsed
 
-        # If time has run out, return None to indicate timeout
+        # If time has run out, return None to indicate timeout, which counts as a wrong answer in the mission logic
         if remaining <= 0:
-            print("\n⏰ Time's up!")
             return None
 
         # ── 5-second warning ──────────────────────────────
@@ -43,12 +85,13 @@ def get_strict_timed_choice():
             warning_played = True
 
         prompt = f"\nChoose wisely (a-d) [{int(remaining)}s left]: "
+        sys.stdout.write(prompt)
+        sys.stdout.flush()
 
         # Get user input with remaining time as timeout
-        user_text, timed_out = timedInput(prompt, timeout=remaining, resetOnInput=False)
+        user_text, timed_out = timedInput('', timeout=remaining, resetOnInput=False)
 
         if timed_out:
-            print("\n⏰ Time's up!")
             return None
 
         # Change to lower case and strip whitespace for validation

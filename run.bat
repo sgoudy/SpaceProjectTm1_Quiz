@@ -1,3 +1,3 @@
 @echo off
-start /wait "" python "%~dp0main.py"
-pause
+start "My Python App" cmd /k "python "%~dp0main.py""
+if errorlevel 1 pause
