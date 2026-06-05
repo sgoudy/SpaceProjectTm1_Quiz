@@ -1,12 +1,17 @@
-# # Use a lightweight Windows base image
-# FROM mcr.microsoft.com/windows/nanoserver:1809
+# Use a Linux Python base image so the build works on Docker Desktop Linux containers
+FROM python:3.12-slim
 
-# # Set the working directory inside the container
-# WORKDIR /SpaceProjectTm1_Quiz
+# Set the working directory inside the container
+WORKDIR /app
 
-# # Copy your batch script from the host to the container
-# COPY run.bat .
+# Copy the app files into the container
+COPY . .
 
-# # Define the entrypoint to execute the batch file when the container starts
-# # Uses cmd.exe /c to run the script and terminate
-# ENTRYPOINT ["cmd.exe", "/c", "run.bat"]   
+# Install Linux audio player for sound support and the Python dependency
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends alsa-utils && \
+    pip install --no-cache-dir -r requirements.txt && \
+    rm -rf /var/lib/apt/lists/*
+
+# Run the game directly with Python
+CMD ["python", "main.py"]
