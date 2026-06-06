@@ -43,10 +43,10 @@ Each target ship is protected by a different cybersecurity domain. Answer fast a
 
 | Ship | Codename | Location | Topic |
 |---|---|---|---|
-| Enterprise | Top Gun | Planet Vulcan | Network Security |
-| Eleanor | ANDROMEDA | Planet Vega | Encryption |
-| Tardis | Tesla | Jupiter's Moon: Io | Social Engineering |
-| Serenity | Firefly | Saturn's Moon: Titan | Malware & Intrusion |
+| Enterprise | Top Gun | Planet Vulcan | **Network Security** |
+| Eleanor | ANDROMEDA | Planet Vega | **Encryption** |
+| Tardis | Tesla | Jupiter's Moon: Io | **Social Engineering** |
+| Serenity | Firefly | Saturn's Moon: Titan | **Malware & Intrusion** |
 
 ---
 
