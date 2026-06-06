@@ -22,34 +22,34 @@ from sound import init_sounds, play_startup
 def main():
 
     # generate WAV files on first run (silent if already exist)
-    # init_sounds()    
+    init_sounds()    
 
     # fanfare plays while the title banner prints
-    # play_startup()   
+    play_startup()   
 
-    # texttime("\n" + "★" * 25+"       GONE IN 60 PARSECS >> Space Heist | Hack or Be Hacked       "+"★" * 25+"\n\n")
+    texttime("\n" + "★" * 25+"       GONE IN 60 PARSECS >> Space Heist | Hack or Be Hacked       "+"★" * 25+"\n\n")
 
     # Run the intro scroll animation
-    # intro_scroll() 
+    intro_scroll() 
 
     # --- Setup Homebase ---
-    # texttime("\n\n   ...Initializing Dottie's Homebase...\n")
-    # time.sleep(1.5)
+    texttime("\n\n   ...Initializing Dottie's Homebase...\n")
+    time.sleep(1.5)
     # Instantiating the homebase with specific attributes
     dottie = Homebase("Dottie", "Asteroid near Pluto, Milky Way", 5)
-    # for line in dottie.summary():
-    #     print(line)
-    #     time.sleep(0.3)
+    for line in dottie.summary():
+        print(line)
+        time.sleep(0.3)
 
     # --- Setup Player Ship ---
-    # texttime("\n\n   ...Initializing Your Hack Ship on Dottie...\n")
-    # time.sleep(1.5)
+    texttime("\n\n   ...Initializing Your Hack Ship on Dottie...\n")
+    time.sleep(1.5)
 
     # Instantiating the player's hack ship with specific attributes
     player_ship = HackShip(name="The Phantom Byte",speed=4.2,capacity=6,weapons=["EMP Cannon", "Cyber Spike", "Signal Jammer"]    )
-    # for line in player_ship.summary():
-    #     print(line)
-    #     time.sleep(0.3)
+    for line in player_ship.summary():
+        print(line)
+        time.sleep(0.3)
    
     # --- Display Targets ---
     # Instantiating the target ships with specific attributes
@@ -67,10 +67,10 @@ def main():
         texttime(section_header("📋 ACTIVE TARGETS"))
        
         # start=1 makes the index begin at 1 instead of the default 0
-        # for i, t in enumerate(targets, start=1):
-        #     print(f"{i}: ", end='', flush=True)
-        #     t.summary()
-        #     time.sleep(0.3)
+        for i, t in enumerate(targets, start=1):
+            print(f"{i}: ", end='', flush=True)
+            t.summary()
+            time.sleep(0.3)
 
         # Logic for numbering enemy ships for user selection
         number_list = list(range(len(targets)))
@@ -86,7 +86,7 @@ def main():
                 
                 if choice_int in numberListPlusOne:
                     selectedTargetShip = targets[choice_int - 1]
-                    texttime(banner(f"🔓 HACK MISSION: TARGET = {selectedTargetShip.name} [{selectedTargetShip.codename}]") )
+                    texttime(banner(f"🔓 HACK MISSION: TARGET = {selectedTargetShip.name} [{selectedTargetShip.codename}]: Defenses = {selectedTargetShip.defenses}%") )
                     break
                 else:
                     print("Invalid choice: number not in the list.")
@@ -132,6 +132,7 @@ def main():
         
         # Player lost the mission, so the target ship remains free and their hull is damaged but they're still alive
         elif player_ship.hull >= 25:
+            
             # Print result to screen
             texttime(f"\n  💀 Mission Failed. '{selectedTargetShip.name}' remains out of reach.\n\n {time_for_mission}")
             

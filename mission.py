@@ -34,7 +34,8 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
         print(line)
         time.sleep(0.2)  
 
-    texttime(f"\n  Answer 4 questions correctly to steal the ship!\n")
+    texttime(f"\n  Answer questions correctly to damage the ship!\n ")
+    texttime(f" It will be added to your fleet if you destroy its defenses.\n")
     texttime(f"  But beware — wrong answers damage YOUR hull.\n")
 
     # Select 6 random questions from the target's cyber topic
@@ -79,7 +80,7 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
         texttime(f"  [Score: {correct} correct / {wrong} wrong]\n")
 
         # Check win condition
-        if correct >= 4:
+        if correct >= 4 or target.is_taken():
             texttime(banner("🏆 MISSION SUCCESS!"))
             print(f"\n  You hacked through {target.name}'s defenses!\n")
             time.sleep(0.5)
