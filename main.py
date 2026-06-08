@@ -129,24 +129,20 @@ def main():
 
             # Print fleet status
             fleet.summary()
-        
+
         # Player lost the mission, so the target ship remains free and their hull is damaged but they're still alive
         elif player_ship.hull >= 25:
             
             # Print result to screen
             texttime(f"\n  💀 Mission Failed. '{selectedTargetShip.name}' remains out of reach.\n\n {time_for_mission}")
             
-            # Print fleet status and send RTB message
-            if len(fleet.ships) > 0:
-                texttime(f"\n\nCurrent fleet status:\n{fleet.summary()}\n  🔧 Return to Dottie for repairs and try again.\n")
-            else:
-                texttime(f"\n  🚀 Your fleet is empty. Return to Dottie for repairs and try again.\n")
+        # End of game, no defenses left   
         else:
             texttime("\n  🚀 Your ship is too damaged to continue. You should probably choose a different career, 'Space Pirate'. 🌌\n")
             game = False
             break
       
-        if len(targets) > 0:
+        if targets:
 
             # Reset Game?
             texttime(f"\n Would you like to attempt another mission? (y/n)")

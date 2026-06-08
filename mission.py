@@ -95,6 +95,3 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
             print(f"  {target.name}'s security systems overwhelmed you.")
             return False
 
-    # Ran out of questions without winning
-    # texttime(banner(f"❌ MISSION FAILED: {target.name} remains out of reach... for now."))
-    # return False

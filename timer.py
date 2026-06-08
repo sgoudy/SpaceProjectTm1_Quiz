@@ -84,6 +84,7 @@ def get_strict_timed_choice():
             play_warning()
             warning_played = True
 
+        # Request user input with the remaining time displayed in the prompt
         prompt = f"\nChoose wisely (a-d) [{int(remaining)}s left]: "
         sys.stdout.write(prompt)
         sys.stdout.flush()

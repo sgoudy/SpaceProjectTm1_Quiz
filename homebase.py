@@ -22,6 +22,6 @@ class Homebase:
         self.SOB = SOB
 
     def summary(self):
-        return[f"\n🪨 HOMEBASE : {self.name}", 
-               f"   Location : {self.location}", 
-               f"   Soles on Board: {self.SOB} crew members"]
+        return[f"\n🪨 HOMEBASE       : {self.name}", 
+               f"   Location       : {self.location}", 
+               f"   Soles on Board : {self.SOB} crew members"]
