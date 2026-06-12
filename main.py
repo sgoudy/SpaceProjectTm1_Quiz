@@ -58,6 +58,7 @@ def main():
             EnemySpaceShip("Andromeda",     "Eleanor", "Planet Vega",         5.1,  "Encryption"),
             EnemySpaceShip("Tardis",      "Tesla",     "Jupiter's Moon: Io",  1.8,  "Social Engineering"),
             EnemySpaceShip("Serenity",    "Firefly",   "Saturn's Moon: Titan",1.2,  "Malware & Intrusion"),
+            EnemySpaceShip("Portis",    "Pelusa",   "Planet Earth",2.2,  "Commons Ports & Protocols"),
         ]
 
     game = True
@@ -131,7 +132,7 @@ def main():
             fleet.summary()
 
         # Player lost the mission, so the target ship remains free and their hull is damaged but they're still alive
-        elif player_ship.hull >= 25:
+        elif player_ship.hull >= 20:
             
             # Print result to screen
             texttime(f"\n  💀 Mission Failed. '{selectedTargetShip.name}' remains out of reach.\n\n {time_for_mission}")

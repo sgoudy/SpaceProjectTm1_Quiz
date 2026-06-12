@@ -31,7 +31,7 @@ class EnemySpaceShip:
         self.defenses = 100      # starts fully defended
         self.cyber_topic = cyber_topic
 
-    def breach(self, amount: int = 25):
+    def breach(self, amount: int = 20):
         """Lower defenses when a question is answered correctly."""
         self.defenses -= amount
         if self.defenses < 0:

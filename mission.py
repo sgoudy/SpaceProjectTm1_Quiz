@@ -59,28 +59,28 @@ def run_hack_mission(player_ship: HackShip, target: EnemySpaceShip):
         if response is None:
             play_timeout()
             wrong += 1
-            player_ship.take_damage(25)
+            player_ship.take_damage(20)
             texttime(f"\n  ⏰ TIME'S UP!  Hull damaged → {player_ship.name}'s hull now at {player_ship.hull}%\n")
         
         # Correct answer and damage target's defenses
         elif response == answer:
             play_correct()
             correct += 1
-            target.breach(25)
+            target.breach(20)
             texttime(f"\n  ✅ CORRECT! Defense breached → {target.name}'s defenses now at {target.defenses}%\n")
         
         # Wrong answer and damage player's hull
         else:
             play_wrong()
             wrong += 1
-            player_ship.take_damage(25)
+            player_ship.take_damage(20)
             texttime(f"\n  ❌ WRONG!  Hull damaged → {player_ship.name}'s hull now at {player_ship.hull}%\n")
             texttime(f"\n  💡 The correct answer was: {answer.upper()}\n\n")
 
         texttime(f"  [Score: {correct} correct / {wrong} wrong]\n")
 
         # Check win condition
-        if correct >= 4 or target.is_taken():
+        if correct >= 5 or target.is_taken():
             texttime(banner("🏆 MISSION SUCCESS!"))
             print(f"\n  You hacked through {target.name}'s defenses!\n")
             time.sleep(0.5)
